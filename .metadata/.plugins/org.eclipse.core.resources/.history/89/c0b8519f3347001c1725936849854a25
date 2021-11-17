@@ -1,0 +1,9 @@
+package projeto_hospital;
+
+public class Pessoa {
+	private String nome;
+	private String dataNascimento;
+	private String sexo;
+	private String cpf;
+	
+}

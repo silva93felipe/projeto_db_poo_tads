@@ -1,0 +1,62 @@
+package projeto_hospital;
+
+public class Pessoa {
+	private String nome;
+	private String dataNascimento;
+	private String sexo;
+	private String cpf;
+	private String telefone;
+	private String email;
+	
+	public Pessoa() { }
+	
+	public String getNome() {
+		return this.nome;
+	}
+	
+	public String setNome(String nome) {
+		return this.nome = nome;
+	}
+	
+	public String getDataNascimento() {
+		return this.dataNascimento;
+	}
+	
+	public String setDataNascimento(String dataNascimento) {
+		return this.dataNascimento = dataNascimento;
+	}
+	
+	public String getSexo() {
+		return this.sexo;
+	}
+	
+	public String setSexto(String sexo) {
+		return this.sexo = sexo;
+	}
+	
+	public String getCpf() {
+		return this.cpf;
+	}
+	
+	public String setCpf(String cpf) {
+		return this.cpf = cpf;
+	}
+	
+	public String getTelefone() {
+		return this.telefone;
+	}
+	
+	public String setTelefone(String telefone) {
+		return this.telefone = telefone;
+	}
+	
+	public String getEmail() {
+		return this.email;
+	}
+	
+	public String setEmail(String email) {
+		return this.email = email;
+	}
+	
+	
+}
