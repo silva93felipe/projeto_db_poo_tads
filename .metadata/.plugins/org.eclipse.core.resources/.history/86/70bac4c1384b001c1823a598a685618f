@@ -1,0 +1,7 @@
+package projeto_hospital;
+
+public class RedeHospital {
+	
+	
+	public RedeHospital() { }
+}

@@ -1,7 +1,7 @@
 package projeto_hospital;
 
 public class Medico extends Pessoa {
-	private int matricula;
+	private String matricula;
 	
 	public Medico() { }
 	
