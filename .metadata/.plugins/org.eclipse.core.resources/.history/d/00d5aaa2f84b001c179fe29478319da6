@@ -1,0 +1,5 @@
+package projeto_hospital;
+
+public interface Produto {
+
+}

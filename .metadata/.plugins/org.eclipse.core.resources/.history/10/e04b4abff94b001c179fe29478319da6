@@ -1,0 +1,26 @@
+package projeto_hospital;
+
+public class Insumo implements Produto {
+	
+	private int quantidade;
+	private String validade;
+	private String lote;
+	private int idProduto;
+	
+	public Insumo() { }
+	
+	public void retirada(int qtd, int id, String lote) {
+		
+		if(this.saldo(int produto)) {
+			System.out.println("Requisição " + lote + " realizado com sucesso.");			
+		}
+	}
+	
+	public boolean saldo(int idProduto) {
+		if(this.quantidade >= 0) {
+			return true;
+		}
+		return false;
+	}
+}
+ 
