@@ -3,58 +3,70 @@ package projeto_hospital;
 public class Medico extends Pessoa {
 	private int matricula;
 	
-	public Medico(String nome, String nasc, String telefn,
-			String email, String sexo, int cpf) {
-		this.cpf = cpf;
-		this.nome = nome;
-		this.dataNasc = nasc;
-		this.sexo = sexo;
-		this.email = email;
-		this.telefone = telefn;
+	Medico(int cpf, String nome, String nasc, String sexo,
+			String email,  String telefn ){
+		super.setCpf(cpf);
+		super.setNome(nome);
+		super.setDataNasc(nasc);
+		super.setSexo(sexo);
+		super.setEmail(email);
+		super.setTelefone(telefn);
 	}
 	
 	  void solicitarMedicamento() {
-		System.out.println("Solicitação de medicamento efetuada.");
+		
+		  System.out.println("SolicitaÃ§Ã£o de medicamento efetuada.");
 	 }
 	
 	 public int getMatricula() {
+		 
 		 return matricula;
 	 }
-	  
+	 
 	 public String getEmail() {
-		 return email;
-	 }
-	
-	 public String getSexo(){
-		 return sexo;
-	 }
-
-	 public String getNome(){
-		 return nome;
-	 } 
-	
-	 public String getDataNasc(){
-		 return dataNasc;
-	 }
 		 
-	 public String getTelefone(){
-		 return telefone;
-	 } 
-	  
-	 public int getCpf(){
-		 return cpf;
-	 }
-	 
-	 public void setTelefone(String telefone){
-		 this.telefone = telefone;
-	 }
-	 
-	 public void setEmail(String email){
-		 this.email = email;
+		 return super.getEmail();
 	 }
 
+	 public String getSexo() {
+		
+		return super.getSexo();
+	 }
+	
+	 public String getNome() {
+		
+		return super.getNome();
+	 }
+	
+	 public String getDataNasc() {
+		
+		return super.getDataNasc();
+	 }
+
+	 public String getTelefone() {
+		
+		return super.getTelefone();
+	 }
+
+	 public int getCpf() {
+		
+		return super.getCpf();
+	 }
+	
 	 public void setMatricula(int matricula) {
+		 
 		 this.matricula = matricula;
 	 }
+	 
+	 public void setTelefone(String telefone) {
+			
+		super.setTelefone(telefone);
+	}
+
+	public void setEmail(String email) {
+			
+		super.setEmail(email);
+	}
+		 
 }
 
