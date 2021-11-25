@@ -1,5 +1,0 @@
-package projeto_hospital;
-
-public class Usuario extends Pessoa {
-	private String endereco;
-}
