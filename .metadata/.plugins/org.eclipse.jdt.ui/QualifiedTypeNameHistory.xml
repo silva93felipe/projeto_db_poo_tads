@@ -3,4 +3,5 @@
     <fullyQualifiedTypeName name="projeto_hospital.RedeHospital"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="projeto_hospital.Produto"/>
+    <fullyQualifiedTypeName name="dominio.Pessoa"/>
 </qualifiedTypeNameHistroy>
