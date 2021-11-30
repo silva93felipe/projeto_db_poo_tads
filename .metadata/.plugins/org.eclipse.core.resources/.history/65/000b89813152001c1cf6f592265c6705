@@ -2,8 +2,6 @@ package visao;
 
 import java.util.Scanner;
 
-import dominio.Clinica;
-
 public class Principal {
 
 	public static void main(String[] args) {

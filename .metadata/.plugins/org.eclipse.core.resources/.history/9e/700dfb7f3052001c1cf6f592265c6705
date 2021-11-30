@@ -1,6 +1,6 @@
 package dominio;
 
-public abstract class Hospital {
+public class Hospital {
 	
 	private String[] telefone = new String[3]; 
 	//tel 1 atendimento1- tel 2 atendimento2- tel 3 empresarial; 
@@ -12,6 +12,7 @@ public abstract class Hospital {
 	
 	public Hospital() {	}
 
+	
 	public String getTelefone(int i) {
 		return telefone[i];
 	}

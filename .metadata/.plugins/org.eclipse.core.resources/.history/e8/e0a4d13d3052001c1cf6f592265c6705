@@ -8,7 +8,6 @@ public class Clinica extends Hospital {
 	ArrayList<Integer> FKmedico 
 	= new ArrayList<Integer>();
 	
-	public Clinica() {}
 	
 	public Clinica(String espec){
 		espec = "Clinica de fraturas"; //exmplo;
