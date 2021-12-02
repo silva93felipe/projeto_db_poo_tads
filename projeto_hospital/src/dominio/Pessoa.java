@@ -1,14 +1,23 @@
-package dominio;
+package projeto_hospital;
 
-public abstract class Pessoa {
-	private int cpf;
-	private String nome;
-	private String dataNasc;
-	private String sexo;
-	private String email;
-	private String telefone;
+  public abstract class Pessoa {
 	
-	public Pessoa() {}
+	  private int cpf;
+	  private String nome;
+	  private String dataNasc;
+	  private char sexo;
+	  private String email;
+	  private String telefone;
+	
+	public Pessoa(int cpf, String nome, String dataNasc, char sexo,
+			String email,  String telefone ) {
+		this.cpf =  cpf;
+		this.nome = nome;
+		this.dataNasc = dataNasc;
+		this.sexo = sexo;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
 	public int getCpf() {
 		return cpf;
@@ -30,11 +39,11 @@ public abstract class Pessoa {
 		this.dataNasc = dataNasc;
 	}
 
-	public String getSexo() {
+	public char getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
 
