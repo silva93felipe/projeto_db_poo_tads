@@ -5,12 +5,15 @@ package dominio;
 		private int cpf;
 		private String nome;
 		private String dataNasc;
-		private String sexo;
+		private char sexo;
 		private int FKusario; //chave estrangeira (cpf) de usuario;
 		
-		public DependenteUsuario(int cpf ,int FKusario ) {
+		public DependenteUsuario(int cpf, String nome, String dataNasc, char sexo, int FKusario ) {
 			this.cpf = cpf;
-			this.FKusario = FKusario;
+			this.nome = nome;
+			this.dataNasc = dataNasc;
+			this.sexo = sexo;
+			this.FKusario = FKusario;			
 		}
 		
 		
@@ -26,7 +29,7 @@ package dominio;
 		public String getDataNasc() {
 			return dataNasc;
 		}
-		public String getSexo() {
+		public char getSexo() {
 			return sexo;
 		}
 		public int getFKusario() {
@@ -41,7 +44,7 @@ package dominio;
 		public void setDataNasc(String dataNasc) {
 			this.dataNasc = dataNasc;
 		}
-		public void setSexo(String sexo) {
+		public void setSexo(char sexo) {
 			this.sexo = sexo;
 		}
 		public void setFKusario(int fKusario) {

@@ -1,27 +1,33 @@
 package visao;
 
-import dominio.Pessoa;
-import dominio.Usuario;
+
+import projeto_hospital.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+
 public class Principal {
-
+		static int cpf; static String nome, dataNas, telefone, email; 
+		static char sexo;
+		
 	public static void main(String[] args) {
-		int cpf; String nome, dataNas, telefone, email; char sexo; 
+		
 		int opcaoMenu, opcaoCli, opcaoMedico, opMedicament;
-
 		Scanner teclado = new Scanner(System.in);
 		
 		ArrayList<Pessoa> usuarios = new ArrayList<Pessoa>();
-		Pessoa usuario;
+		ArrayList<DependenteUsuario> DependentUsu = new ArrayList<DependenteUsuario>();
+		ArrayList<Medico> medicos = new ArrayList<Medico>();
 		
+		Medico medico;
+		Pessoa usuario;		
+		DependenteUsuario depend;
 		do {
 			System.out.println("\n------------------------------------");
 			System.out.println("\n MENU PRINCIPAL");
 			System.out.println("\n------------------------------------");
 			System.out.println("1 - CLIENTE");
-			System.out.println("2 - MÃ‰DICO");
+			System.out.println("2 - MÉDICO");
 			System.out.println("3 - MEDICAMENTOS");
 			System.out.println("4 - SAIR");
 			System.out.println("\n------------------------------------");
@@ -34,7 +40,7 @@ public class Principal {
 						System.out.println("\n------------------------------------");
 						System.out.println("\n CLIENTE");
 						System.out.println("\n------------------------------------");
-						System.out.println(" 1- CADASTRAR USUÃ�RIO");
+						System.out.println(" 1- CADASTRAR USUÁRIO");
 						System.out.println(" 2- CADASTRAR DEPENDENTE");
 						System.out.println(" 3- MARCAR CONSULTA");
 						System.out.println(" 4- CANCELAR CONSULTA");
@@ -48,44 +54,43 @@ public class Principal {
 						
 						case 1:
 							System.out.println("Insira dados abaixo:");
-							System.out.println("CPF:");
-							cpf = teclado.nextInt();
+							moduloCadastro();
 							
-							System.out.println("Data de nascimento (SEM HIFEN OU ESPACO): ");
-							//teclado.nextLine();
-							dataNas = teclado.nextLine();
-							
-							System.out.println("Nome Completo");
-							nome = teclado.nextLine();
-							
-							System.out.println("Sexo (M /F )");
-							sexo = teclado.next().charAt(0);
-							
-							System.out.println("Telefone (APENAS NUMEROS)");
-							telefone = teclado.nextLine();
-							
-							System.out.println("Email");
-							email = teclado.nextLine();
-								
-							usuario = new Usuario(cpf, nome, dataNas, sexo, email, telefone);
+							usuario = new Usuario(cpf, nome, dataNas, sexo, email, telefone);							
 							usuarios.add(usuario);
 							
 							break;
 							
 						case 2:
-							int aux; boolean comp = false;
+							int cpfRespon; boolean comp = false;
 							System.out.println("Insira dados abaixo");
-							System.out.println("Qual CPF dos responssavel: ");
-								aux = teclado.nextInt();
+							System.out.println("Qual CPF dos responsável? ");
+								cpfRespon = teclado.nextInt();
+								
 								for (int i = 0; i < usuarios.size(); i++) {
-									if((aux == usuarios.get(i).getCpf())&& comp != true )
+									if((cpfRespon == usuarios.get(i).getCpf())&& comp != true )
 										comp = true;
 								}
 							if(comp == false) {
 								System.out.println("Nao eh possivel cadastrar!");
-								System.out.println("CPF do resposanvel nao encontrado.");}
+								System.out.println("CPF do resposável não encontrado.");}
 							else {
-								System.out.println("Insira dados abaixo...");
+								System.out.println("Responsável OK! Insira dados abaixo...");
+								
+								System.out.println("cpf -APENAS NUMEROS");
+								cpf = teclado.nextInt(); teclado.nextLine();
+								
+							 	System.out.println("data de nascimento -SEM HIFEN OU ESPAÇO");								
+								dataNas = teclado.nextLine();
+								
+								System.out.println("nome -COMPLETO");
+								nome = teclado.nextLine();
+								
+								System.out.println("sexo -M ou F");
+								sexo = teclado.next().charAt(0); 	
+								
+								depend = new DependenteUsuario(cpf, nome, dataNas, sexo, cpfRespon);
+								DependentUsu.add(depend);
 								
 							}
 							break;
@@ -107,7 +112,7 @@ public class Principal {
 				case 2:
 					do {
 						System.out.println("\n------------------------------------");
-						System.out.println("\n Mï¿½DICO");
+						System.out.println("\n MÉDICO");
 						System.out.println("\n------------------------------------");
 						System.out.println("1 - CADASTRAR");
 						System.out.println("2 - AGENDA");
@@ -118,6 +123,10 @@ public class Principal {
 						
 						switch(opcaoMedico) {
 						case 1:
+							System.out.println("Insira dados abaixo:");
+							moduloCadastro();
+							 medico = new Medico(cpf, nome, dataNas, sexo, email, telefone);
+							 medicos.add(medico);
 							break;
 							
 						case 2:
@@ -143,6 +152,9 @@ public class Principal {
 						
 						switch(opMedicament) {
 						case 1:
+							System.out.println("Insira dados abaixo:");
+							String IdLote, validade;	int quantd;
+							
 							break;
 							
 						case 2:
@@ -160,6 +172,28 @@ public class Principal {
 				}
 			
 		}while(opcaoMenu!=4);
-		 
+				  
+	 }
+	static private void moduloCadastro( ) { 
+		Scanner cin = new Scanner(System.in);
+		System.out.println("cpf -APENAS NUMEROS");
+		cpf = cin.nextInt(); cin.nextLine();
+		
+	 	System.out.println("data de nascimento -SEM HIFEN OU ESPAÇO");
+		//cin.nextLine();
+		dataNas = cin.nextLine();
+		
+		System.out.println("nome -COMPLETO");
+		nome = cin.nextLine();
+		
+		System.out.println("sexo -M ou F");
+		sexo = cin.next().charAt(0);	cin.nextLine();	
+			
+		System.out.println("telefone -APENAS NUMEROS"); 
+		telefone = cin.nextLine();
+		
+		System.out.println("email");
+		email = cin.nextLine();
+		
 	}
 }
