@@ -74,18 +74,18 @@ public class Principal {
 							
 						case 2:
 							int aux; boolean comp = false;
-							System.out.println("Insira dados abaixo");
-							System.out.println("Qual CPF dos responssavel: ");
+							System.out.println("insira dados abaixo");
+							System.out.println("Qual cpf do ResponsÃ¡vel -DE USUÃ�RIO JÃ� CADASTRADO");
 								aux = teclado.nextInt();
 								for (int i = 0; i < usuarios.size(); i++) {
 									if((aux == usuarios.get(i).getCpf())&& comp != true )
 										comp = true;
 								}
 							if(comp == false) {
-								System.out.println("Nao eh possivel cadastrar!");
-								System.out.println("CPF do resposanvel nao encontrado.");}
+								System.out.println("NÃ£o Ã© possivel cadastrar!");
+								System.out.println("cpf do responsÃ¡vel nÃ£o econtrado!");}
 							else {
-								System.out.println("Insira dados abaixo...");
+								System.out.println("insira dados abaixo");
 								
 							}
 							break;
@@ -155,7 +155,7 @@ public class Principal {
 					break;
 				
 					
-				default: System.out.println("Opcao invalida...");
+				default: System.out.println("opÃ§Ã£o invÃ¡lida...");
 				
 				}
 			

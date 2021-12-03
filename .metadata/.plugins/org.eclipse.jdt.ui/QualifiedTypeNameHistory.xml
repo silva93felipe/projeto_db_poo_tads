@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="projeto_hospital.RedeHospital"/>
-    <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="projeto_hospital.Produto"/>
-    <fullyQualifiedTypeName name="dominio.Pessoa"/>
     <fullyQualifiedTypeName name="dominio.Clinica"/>
+    <fullyQualifiedTypeName name="projeto_hospital.Usuario"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="dominio.Pessoa"/>
+    <fullyQualifiedTypeName name="dominio.Usuario"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

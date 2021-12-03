@@ -1,4 +1,4 @@
-package dominio;
+package projeto_hospital;
 
   public class Usuario extends Pessoa {
 	  
