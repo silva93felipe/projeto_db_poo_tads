@@ -1,7 +1,7 @@
 package visao;
 
 
-import projeto_hospital.*;
+import dominio.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -44,13 +44,12 @@ public class Principal {
 						System.out.println(" 2- CADASTRAR DEPENDENTE");
 						System.out.println(" 3- MARCAR CONSULTA");
 						System.out.println(" 4- CANCELAR CONSULTA");
-						System.out.println(" 5- TODAS AS CONSULTAS");
+						System.out.println(" 5- TODAS AS CONSULTAS PENDENTES");
 						System.out.println(" 6- VOLTAR");
 						System.out.println("\n------------------------------------");
 						opcaoCli = teclado.nextInt();
 						
 						switch(opcaoCli) { 
-						
 						
 						case 1:
 							System.out.println("Insira dados abaixo:");
@@ -89,20 +88,25 @@ public class Principal {
 								System.out.println("sexo -M ou F");
 								sexo = teclado.next().charAt(0); 	
 								
-								depend = new DependenteUsuario(cpf, nome, dataNas, sexo, cpfRespon);
+								depend = new DependenteUsuario(cpf, nome, dataNas, sexo);
 								DependentUsu.add(depend);
 								
 							}
 							break;
 						
 						case 3:
+							System.out.println("Consulta marcada...");
 							break;
+							
 						case 4:
+							System.out.println("Consulta cancelada...");
 							break;
+							
 						case 5:
+							System.out.println("Suas consultas pendentes sao: ");
 							break;
-						case 6:
-							break;
+							
+						default: System.out.println("Opcao invalida...");
 						}
 						
 					}while(opcaoCli!=6);
@@ -130,13 +134,16 @@ public class Principal {
 							break;
 							
 						case 2:
+							System.out.println("Agenda do medico fulado é... ");
 							break;
 						
+						default: System.out.println("Opcao invalida...");
 						}
 						
 					}while(opcaoMedico!=3);
 					
 					break;
+					
 				case 3:
 					
 					do {
@@ -146,27 +153,31 @@ public class Principal {
 						System.out.println("1 - CADASTRAR");
 						System.out.println("2 - CONSULTAR ESTOQUE");
 						System.out.println("3 - SOLICITAR");
+						System.out.println("4 - VOLTAR");
 						System.out.println("\n------------------------------------");
 						
 						opMedicament = teclado.nextInt();
 						
 						switch(opMedicament) {
 						case 1:
-							System.out.println("Insira dados abaixo:");
-							String IdLote, validade;	int quantd;
-							
+							System.out.println("Medicamento cadastrado...");
 							break;
 							
 						case 2:
+							System.out.println("Estoque do produto tal é...");
 							break;
-						
+							
+						case 3:
+							System.out.println("Estoque do produto tal é...");
+							break;
+							
+						default: System.out.println("Opcao invalida...");
 						}
 						
-					}while(opMedicament!=3);
+					}while(opMedicament!=4);
 					
 					break;
 				
-					
 				default: System.out.println("Opcao invalida...");
 				
 				}
@@ -174,26 +185,5 @@ public class Principal {
 		}while(opcaoMenu!=4);
 				  
 	 }
-	static private void moduloCadastro( ) { 
-		Scanner cin = new Scanner(System.in);
-		System.out.println("cpf -APENAS NUMEROS");
-		cpf = cin.nextInt(); cin.nextLine();
-		
-	 	System.out.println("data de nascimento -SEM HIFEN OU ESPAÇO");
-		//cin.nextLine();
-		dataNas = cin.nextLine();
-		
-		System.out.println("nome -COMPLETO");
-		nome = cin.nextLine();
-		
-		System.out.println("sexo -M ou F");
-		sexo = cin.next().charAt(0);	cin.nextLine();	
-			
-		System.out.println("telefone -APENAS NUMEROS"); 
-		telefone = cin.nextLine();
-		
-		System.out.println("email");
-		email = cin.nextLine();
-		
-	}
+
 }

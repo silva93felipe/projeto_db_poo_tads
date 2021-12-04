@@ -1,7 +1,6 @@
 package dominio;
 
   public abstract class Pessoa {
-	
 	  private int cpf;
 	  private String nome;
 	  private String dataNasc;
@@ -10,7 +9,8 @@ package dominio;
 	  private String telefone;
 	
 	public Pessoa(int cpf, String nome, String dataNasc, char sexo,
-			String email,  String telefone ) {
+			String email,  String telefone ) 
+	{
 		this.cpf =  cpf;
 		this.nome = nome;
 		this.dataNasc = dataNasc;
@@ -62,6 +62,4 @@ package dominio;
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
-	
 }

@@ -1,23 +1,15 @@
 package dominio;
 
 public class Medicamento implements RequisicaoMedica {
-	
 	private String IDlote;
 	private int quantidade;
 	private String validade;
-	
 	
 	public Medicamento( String IDlote, String validade, int quantidade) {
 		this.IDlote  = IDlote;
 		this.validade = validade;
 		this.quantidade = quantidade;
 	}
-	
-	
-	
-	
-	
-	
 	
 	public boolean saldo(int idProduto) {
 		if(this.quantidade >= 0) {
@@ -26,8 +18,7 @@ public class Medicamento implements RequisicaoMedica {
 		return false;
 	}
 	
-	public void retirada(int quantidade, int idProduto, String lote) {
-		
+	public void retirada(int quantidade, int idProduto, String lote) {	
 		this.quantidade -= quantidade;
 		System.out.println("Requisição " + lote + " realizado com sucesso.");
 				
