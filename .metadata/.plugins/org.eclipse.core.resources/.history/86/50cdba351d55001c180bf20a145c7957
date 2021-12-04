@@ -3,7 +3,7 @@ package persistencia;
 public class ClinicaDAO {
 	private Conexao minhaConexao;
 	
-	private final String BUSCAR = "select * from \"Clinica\" where \"Id\" = ?";
+	private final String BUSCAR = "select * from \"Clinica\"";
 	
 	
 	public ClinicaDAO() {

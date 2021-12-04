@@ -53,7 +53,7 @@ public class Principal {
 						
 						case 1:
 							System.out.println("Insira dados abaixo:");
-							//moduloCadastro();
+							moduloCadastro();
 							
 							usuario = new Usuario(cpf, nome, dataNas, sexo, email, telefone);							
 							usuarios.add(usuario);
@@ -128,7 +128,7 @@ public class Principal {
 						switch(opcaoMedico) {
 						case 1:
 							System.out.println("Insira dados abaixo:");
-							//moduloCadastro();
+							moduloCadastro();
 							 medico = new Medico(cpf, nome, dataNas, sexo, email, telefone);
 							 medicos.add(medico);
 							break;

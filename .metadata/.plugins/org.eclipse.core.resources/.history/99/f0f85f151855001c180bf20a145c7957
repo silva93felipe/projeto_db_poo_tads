@@ -43,6 +43,5 @@ public class Conexao {
 	// Comandos => INSERT, UPDATE e DELETE nao tem retorno (EXECUTE()) (USAR O PREPAREDSTATEMENT)
 	// Comando => SELECT (EXECUTEQUERY) (STATEMENT, pois não precisa de codigo de terceiros)
 	// Cada um vai para a TABELA DAO que esteja se referido. Consulta CLIENTE na tabela CLIENTEDAO
-	// RESULTSET é capaz de receber um retorno  de uma query. Com o comando SELECT
-	// A classe CONEXAO não se comunica com o BANCO e sim as classes DAO
+	// RESULTSET é capaz de receber um retorno  de um query. Com o comando SELECT que ge
 }
