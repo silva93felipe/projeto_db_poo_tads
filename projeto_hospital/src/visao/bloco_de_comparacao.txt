@@ -1,0 +1,5 @@
+boolean comp = false;
+for (int i = 0; i < usuarios.size(); i++) {
+	if((cpfRespon == usuarios.get(i).getCpf())&& comp != true )
+		comp = true;
+}
