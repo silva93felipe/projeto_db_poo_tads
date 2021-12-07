@@ -2,20 +2,22 @@ package dominio;
 
 	public class DependenteUsuario {
 	
-		private int cpf;
+		private String cpf;
 		private String nome;
 		private String dataNasc;
-		private char sexo;
+		private String sexo;
 		//private int FKusario; 
 		
-		public DependenteUsuario(int cpf, String nome, String dataNasc, char sexo) {
+		public DependenteUsuario() {};
+		
+		public DependenteUsuario(String cpf, String nome, String dataNasc, String sexo) {
 			this.cpf = cpf;
 			this.nome = nome;
 			this.dataNasc = dataNasc;
 			this.sexo = sexo;		
 		}
 		
-		public int getCpf() {
+		public String getCpf() {
 			return cpf;
 		}
 		public String getNome() {
@@ -24,10 +26,10 @@ package dominio;
 		public String getDataNasc() {
 			return dataNasc;
 		}
-		public char getSexo() {
+		public String getSexo() {
 			return sexo;
 		}
-		public void setCpf(int cpf) {
+		public void setCpf(String cpf) {
 			this.cpf = cpf;
 		}
 		public void setNome(String nome) {
@@ -36,7 +38,7 @@ package dominio;
 		public void setDataNasc(String dataNasc) {
 			this.dataNasc = dataNasc;
 		}
-		public void setSexo(char sexo) {
+		public void setSexo(String sexo) {
 			this.sexo = sexo;
 		}
 				

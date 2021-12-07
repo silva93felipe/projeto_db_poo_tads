@@ -1,0 +1,22 @@
+package dominio;
+
+public class Medico extends Pessoa {
+	
+	public Medico() {
+		super();
+	};
+	
+	public Medico(string cpf, String nome, String dataNasc, String sexo,
+			String email,  String telefone)
+	{
+		super(cpf, nome, dataNasc, sexo, email, telefone);
+	}
+	
+  void solicitarMedicamento() {
+	  System.out.println("Solicitacao de medicamento efetuada.");
+  }
+ 
+  
+  
+}
+

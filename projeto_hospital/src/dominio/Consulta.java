@@ -3,17 +3,19 @@ package dominio;
 public class Consulta {
 	private String hora;
 	private String data;
-	private  int FKclinica;
-	private  int FKusuario; 
+	private String FKmedico;
+	private String FKusuario;
+	private boolean status;
 	
-	//cod consutorio e cpf do usuario;
-	public Consulta(int FKconsut, int FKusuario) {
-		this.FKclinica = FKconsut;
+	public Consulta() {};
+	
+	public Consulta(String FKmedico, String FKusuario) {
+		this.FKmedico = FKmedico;
 		this.FKusuario = FKusuario;
 	}
 
 	public String getHora() {
-		return hora;
+		return this.hora;
 	}
 
 	public void setHora(String hora) {
@@ -21,22 +23,36 @@ public class Consulta {
 	}
 
 	public String getData() {
-		return data;
+		return this.data;
 	}
 
 	public void setData(String data) {
 		this.data = data;
 	}
 
-	public int getFKclinica() {
-		return FKclinica;
+	public String getFKmedico() {
+		return this.FKmedico;
 	}
 
-	public int getFKusuario() {
-		return FKusuario;
+	public void setFKmedico(String FKmedico ) {
+		this.FKmedico = FKmedico;
 	}
 	
+	public String getFKusuario() {
+		return this.FKusuario;
+	}
 	
+	public void setFKusuario(String fkUsuario) {
+		this.FKusuario = fkUsuario;
+	}
+	
+	public boolean getStatus() {
+		return this.status;
+	}
+	
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	
 }
 

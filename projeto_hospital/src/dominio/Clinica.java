@@ -2,10 +2,8 @@ package dominio;
 import java.util.ArrayList;
 
 public class Clinica extends Hospital {
-//	private int codClinc;
-
 	public String espec;
-	ArrayList<Medico> FKmedico= new ArrayList<Medico>();
+	ArrayList<Medico> FKmedicos = new ArrayList<Medico>();
 	
 	public Clinica() {}
 	
@@ -17,27 +15,13 @@ public class Clinica extends Hospital {
 		return espec;
 	}
 	
-//	public int getCodClinc() {
-//		return codClinc;
-//	}
-	
-//	public void Status() {
-//		System.out.println("Você está na clinica "+codClinc);
-//		System.out.println("/n "+ espec);
-//	}
-	
-//	public int getFKcpf(int i) {
-//		return FKmedico.get(i);
-//	}
-//	
-	public void seuMedico() {
-		System.out.println("Voce sera atendido pelo medico(a):");
-		System.out.println(FKmedico.get(2));
+	public boolean buscarMedico(String cpf) {
+		for(int i = 0; i < FKmedicos.size(); i++ ) {
+			if(FKmedicos.get(i).getCpf() == cpf) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
-	
-	public void vincularMedico(int cpf){
-		//FKmedico.add(cpf);
-		System.out.println("Vinculado com sucesso!");
-	}
-	
 }

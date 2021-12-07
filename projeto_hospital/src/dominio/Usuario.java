@@ -3,12 +3,15 @@ package dominio;
 import java.util.ArrayList;
 
 public class Usuario extends Pessoa {
-	  
-	  private String endereco;
+	private String endereco;
 	  ArrayList<DependenteUsuario> dependentes = new ArrayList<DependenteUsuario>(); 
 	  
-	  public Usuario(int cpf, String nome, String dataNasc, char sexo,
-				String email,  String telefone){
+	  public Usuario() {
+		  super();
+	  };
+	  
+	  public Usuario(String cpf, String nome, String dataNasc, String sexo,
+				String email, String telefone){
 		  super(cpf, nome, dataNasc, sexo, email, telefone);
 	  }
 	  
@@ -20,7 +23,4 @@ public class Usuario extends Pessoa {
 		this.endereco = endereco;
 	  }
 
-	  /*public void marcarConsulta(){
-		System.out.println("Consulta Marcada"); 
-	  }*/
 }

@@ -7,21 +7,18 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class Principal {
-		static int cpf; static String nome, dataNas, telefone, email; 
-		static char sexo;
-		
+	
 	public static void main(String[] args) {
+		ArrayList<Usuario> users = new ArrayList<Usuario>();
+		ArrayList<Medico> medicos = new ArrayList<Medico>();
+		ArrayList<DependenteUsuario> dependentes = new ArrayList<DependenteUsuario>();
+		ArrayList<Consulta> consultas = new ArrayList<Consulta>();
 		
 		int opcaoMenu, opcaoCli, opcaoMedico, opMedicament;
+		
 		Scanner teclado = new Scanner(System.in);
 		
-		ArrayList<Pessoa> usuarios = new ArrayList<Pessoa>();
-		ArrayList<DependenteUsuario> DependentUsu = new ArrayList<DependenteUsuario>();
-		ArrayList<Medico> medicos = new ArrayList<Medico>();
-		
-		Medico medico;
-		Pessoa usuario;		
-		DependenteUsuario depend;
+	
 		do {
 			System.out.println("\n------------------------------------");
 			System.out.println("\n MENU PRINCIPAL");
@@ -40,57 +37,80 @@ public class Principal {
 						System.out.println("\n------------------------------------");
 						System.out.println("\n CLIENTE");
 						System.out.println("\n------------------------------------");
-						System.out.println(" 1- CADASTRAR USUÁRIO");
-						System.out.println(" 2- CADASTRAR DEPENDENTE");
-						System.out.println(" 3- MARCAR CONSULTA");
-						System.out.println(" 4- CANCELAR CONSULTA");
-						System.out.println(" 5- TODAS AS CONSULTAS PENDENTES");
-						System.out.println(" 6- VOLTAR");
+						System.out.println(" 1 - CADASTRAR USUÁRIO");
+						System.out.println(" 2 - CADASTRAR DEPENDENTE");
+						System.out.println(" 3 - MARCAR CONSULTA");
+						System.out.println(" 4 - CANCELAR CONSULTA");
+						System.out.println(" 5 - TODAS AS CONSULTAS PENDENTES");
+						System.out.println(" 6 - VOLTAR");
 						System.out.println("\n------------------------------------");
+						
 						opcaoCli = teclado.nextInt();
 						
 						switch(opcaoCli) { 
 						
 						case 1:
-							System.out.println("Insira dados abaixo:");
-							//moduloCadastro();
+							Usuario user = new Usuario();
 							
-							usuario = new Usuario(cpf, nome, dataNas, sexo, email, telefone);							
-							usuarios.add(usuario);
+							System.out.println("Digite o CPF (Sem os pontos): ");
+							user.setCpf(teclado.nextLine()); teclado.next();			
 							
+							System.out.println("Digite o nome: ");
+							user.setNome(teclado.nextLine()); teclado.next();					
+							
+							System.out.println("Digite a data de nascimento: ");
+							user.setDataNasc(teclado.nextLine()); teclado.next();
+
+							System.out.println("Digite o sexo (M / F): ");
+							user.setSexo(teclado.nextLine()); teclado.next();
+							
+							System.out.println("Digite o email: ");
+							user.setEmail(teclado.nextLine()); teclado.next();
+							
+							System.out.println("Digite o telefone (Apenas numeros): ");
+							user.setTelefone(teclado.nextLine()); teclado.next();
+							
+							System.out.println("Digite o endereco: ");
+							user.setEndereco(teclado.next()); 
+							
+							users.add(user);
+							System.out.println("Usuario cadastrado com sucesso.");
+
 							break;
 							
 						case 2:
-							int cpfRespon; boolean comp = false;
-							System.out.println("Insira dados abaixo");
-							System.out.println("Qual CPF dos responsável? ");
-								cpfRespon = teclado.nextInt();
-								
-								for (int i = 0; i < usuarios.size(); i++) {
-									if((cpfRespon == usuarios.get(i).getCpf())&& comp != true )
-										comp = true;
+							boolean achou = false;
+							System.out.println("Digite o CPF do titular (Sem os pontos): ");
+							String auxTitularCpf = teclado.nextLine(); teclado.next();
+							
+							for(int i = 0; i < users.size(); i++) {
+								if(users.get(i).getCpf() == auxTitularCpf) {
+									achou = true;
 								}
-							if(comp == false) {
-								System.out.println("Nao eh possivel cadastrar!");
-								System.out.println("CPF do resposável não encontrado.");}
-							else {
-								System.out.println("Responsável OK! Insira dados abaixo...");
+							}
+							
+							if(achou == true) {
+								System.out.println("Titular encontrado.");
 								
-								System.out.println("cpf -APENAS NUMEROS");
-								cpf = teclado.nextInt(); teclado.nextLine();
+								DependenteUsuario dependente = new DependenteUsuario();
+								System.out.println("Digite o CPF (Sem os pontos): ");
+								dependente.setCpf(teclado.nextLine()); teclado.next();			
 								
-							 	System.out.println("data de nascimento -SEM HIFEN OU ESPAÇO");								
-								dataNas = teclado.nextLine();
+								System.out.println("Digite o nome: ");
+								dependente.setNome(teclado.nextLine()); teclado.next();					
 								
-								System.out.println("nome -COMPLETO");
-								nome = teclado.nextLine();
+								System.out.println("Digite a data de nascimento: ");
+								dependente.setDataNasc(teclado.nextLine()); teclado.next();
+
+								System.out.println("Digite o sexo (M / F): ");
+								dependente.setSexo(teclado.nextLine()); teclado.next();
 								
-								System.out.println("sexo -M ou F");
-								sexo = teclado.next().charAt(0); 	
-								
-								depend = new DependenteUsuario(cpf, nome, dataNas, sexo);
-								DependentUsu.add(depend);
-								
+								dependentes.add(dependente);
+								System.out.println("Dependente cadastrado com sucesso.");
+							}
+							
+							if(achou == false) {
+								System.out.println("Titular não encontrado.");								
 							}
 							break;
 						
@@ -127,14 +147,43 @@ public class Principal {
 						
 						switch(opcaoMedico) {
 						case 1:
-							System.out.println("Insira dados abaixo:");
-							//moduloCadastro();
-							 medico = new Medico(cpf, nome, dataNas, sexo, email, telefone);
-							 medicos.add(medico);
+							
+							Medico medico = new Medico();
+							
+							System.out.println("Digite o CPF (Sem os pontos): ");
+							medico.setCpf(teclado.nextLine()); teclado.next();			
+							
+							System.out.println("Digite o nome: ");
+							medico.setNome(teclado.nextLine()); teclado.next();					
+							
+							System.out.println("Digite a data de nascimento: ");
+							medico.setDataNasc(teclado.nextLine()); teclado.next();
+
+							System.out.println("Digite o sexo (M / F): ");
+							medico.setSexo(teclado.nextLine()); teclado.next();
+							
+							System.out.println("Digite o email: ");
+							medico.setEmail(teclado.nextLine()); teclado.next();
+							
+							System.out.println("Digite o telefone (Apenas numeros): ");
+							medico.setTelefone(teclado.nextLine()); teclado.next();
+
+							medicos.add(medico);
+							System.out.println("Usuario cadastrado com sucesso.");
+				
 							break;
 							
 						case 2:
-							System.out.println("Agenda do medico fulado é... ");
+							System.out.println("Digite o CPF do medico (Sem os pontos): ");
+							String auxMedico = teclado.nextLine(); teclado.next();
+							for(int i = 0; i < consultas.size(); i++) {
+								if(consultas.get(i).getFKmedico() == auxMedico) {
+									System.out.println("======Consultas======");
+									System.out.println("Data " + consultas.get(i).getData() + " | " + "Hora " + consultas.get(i).getHora());
+								}
+							}
+
+//							System.out.println("Medico nao localizado.");
 							break;
 						
 						default: System.out.println("Opcao invalida...");
@@ -183,7 +232,8 @@ public class Principal {
 				}
 			
 		}while(opcaoMenu!=4);
-				  
+		
+		System.out.println("Fim do programa...");
 	 }
 
 }

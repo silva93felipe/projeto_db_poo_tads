@@ -1,0 +1,53 @@
+package dominio;
+
+public class Consulta {
+	private String hora;
+	private String data;
+	private String FKclinica;
+	private String FKusuario; 
+	
+	
+	public Consulta() {};
+	
+	//cod consutorio e cpf do usuario;
+	public Consulta(String FKconsut, String FKusuario) {
+		this.FKclinica = FKconsut;
+		this.FKusuario = FKusuario;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getFKclinica() {
+		return FKclinica;
+	}
+
+	public void setFKclinica(String fkClinica ) {
+		this.FKclinica = fkClinica;
+	}
+	
+	public String getFKusuario() {
+		return FKusuario;
+	}
+	
+	public void setFKusuario(String fkUsuario) {
+		this.FKusuario = fkUsuario;
+	}
+	
+	
+	
+}
+
