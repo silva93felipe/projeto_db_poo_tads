@@ -1,0 +1,57 @@
+package dominio;
+
+public class Medicamento implements RequisicaoMedica {
+	private String IDlote;
+	private int quantidade;
+	private String descricaProduto;
+	
+	public Medicamento() {}
+	
+	public Medicamento(int quantidade, String descricaProduto) {
+		this.quantidade = quantidade;
+		this.descricaProduto =  descricaProduto;
+	}
+	
+	public String getIDlote() {
+		return IDlote;
+	}
+
+	public void setIDlote(String iDlote) {
+		IDlote = iDlote;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getDescricaProduto() {
+		return descricaProduto;
+	}
+
+	public void setDescricaProduto(String descricaProduto) {
+		this.descricaProduto = descricaProduto;
+	}
+
+	public boolean saldo(int idProduto) {
+		if(this.quantidade >= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void retirada(int quantidade, int idProduto, String lote) {	
+		this.quantidade -= quantidade;
+		System.out.println("Requisicao " + lote + " realizado com sucesso.");
+				
+		/*if(this.saldo(idProduto)) {
+			this.quantidade -= quantidade;
+			System.out.println("Requisi��o " + lote + " realizado com sucesso.");	
+		}*/	
+	}
+	
+}
+ 

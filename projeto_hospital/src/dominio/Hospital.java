@@ -3,11 +3,15 @@ package dominio;
 public abstract class Hospital {
 	private String endereco;	
 	private String[] telefone = new String[3]; 
-	//tel 1 atendimento1- tel 2 atendimento2- tel 3 empresarial; 
 	private String[] email = new String[3];
-	//email 1 atendimento1- email 2 cobranças- email 3 empresarial;
 	
 	public Hospital() {	}
+	
+	public Hospital(String endereco, String[] telefone, String[] email) {	
+		this.endereco = endereco;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
 	public String getTelefone(int i) {
 		return telefone[i];

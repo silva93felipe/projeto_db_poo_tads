@@ -1,37 +1,59 @@
 package dominio;
 
 public class Medicamento implements RequisicaoMedica {
+	private int IdProduto;
 	private String IDlote;
 	private int quantidade;
-	private String validade;
+	private String descricaProduto;
 	
-	public Medicamento( String IDlote, String validade, int quantidade) {
-		this.IDlote  = IDlote;
-		this.validade = validade;
+	public Medicamento() {}
+	
+	public Medicamento( int IdProduto, int quantidade, String descricaProduto) {
+		this.IdProduto = IdProduto;
+		this.quantidade = quantidade;
+		this.descricaProduto =  descricaProduto;
+	}
+	
+	public int getIdProduto() {
+		return this.IdProduto;
+	}
+
+	public void setIdProduto(int idProduto) {
+		this.IdProduto = idProduto;
+	}
+
+	public String getIDlote() {
+		return this.IDlote;
+	}
+
+	public void setIDlote(String iDlote) {
+		this.IDlote = iDlote;
+	}
+
+	public int getQuantidade() {
+		return this.quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
-	
-	public boolean saldo(int idProduto) {
-		if(this.quantidade >= 0) {
-			return true;
-		}
-		return false;
+
+	public String getDescricaProduto() {
+		return this.descricaProduto;
 	}
-	
-	public void retirada(int quantidade, int idProduto, String lote) {	
-		this.quantidade -= quantidade;
-		System.out.println("Requisição " + lote + " realizado com sucesso.");
-				
-		/*if(this.saldo(idProduto)) {
+
+	public void setDescricaProduto(String descricaProduto) {
+		this.descricaProduto = descricaProduto;
+	}
+
+	public void retirada(int quantidade, int idProduto) {
+		if(this.quantidade - quantidade <= 0) {
+			System.out.println(this.descricaProduto + " nao tem saldo.");
+		}else {
 			this.quantidade -= quantidade;
-			System.out.println("Requisi��o " + lote + " realizado com sucesso.");	
-		}*/	
-	}
-	
-	public boolean validadeProd(int idProduto) {
-		//implementar...
-		this.validade = "";
-		return true;
+			System.out.println("Retidade de " + quantidade + "do produto " +  this.descricaProduto + " realizada.");			
+		}
+				
 	}
 	
 }

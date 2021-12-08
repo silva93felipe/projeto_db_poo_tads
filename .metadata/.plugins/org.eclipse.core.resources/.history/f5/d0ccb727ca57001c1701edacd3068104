@@ -1,0 +1,9 @@
+package dominio;
+
+public interface RequisicaoMedica {
+	
+	void retirada(int quantidade, int idProduto, String lote);
+	
+	int saldo(int idProduto);
+		
+}

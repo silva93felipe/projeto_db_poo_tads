@@ -2,17 +2,22 @@ package dominio;
 import java.util.ArrayList;
 
 public class Clinica extends Hospital {
-	public String espec;
+	public String especialidade;
+	
 	ArrayList<Medico> FKmedicos = new ArrayList<Medico>();
 	
 	public Clinica() {}
 	
-	public Clinica(String espec){
-		espec = "Clinica de fraturas"; //exmplo;
+	public Clinica(String especialidade){
+		this.especialidade = especialidade;
 	}
 	
 	public String getEspec() {
-		return espec;
+		return this.especialidade;
+	}
+	
+	public void setEspec(String especialidade) {
+		this.especialidade = especialidade;
 	}
 	
 	public boolean buscarMedico(String cpf) {

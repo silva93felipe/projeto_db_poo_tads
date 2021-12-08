@@ -11,12 +11,5 @@ public class Medico extends Pessoa {
 	{
 		super(cpf, nome, dataNasc, sexo, email, telefone);
 	}
-	
-  void solicitarMedicamento() {
-	  System.out.println("Solicitacao de medicamento efetuada.");
-  }
- 
-  
-  
 }
 

@@ -1,45 +1,24 @@
 package dominio;
 
-	public class DependenteUsuario {
-	
-		private String cpf;
-		private String nome;
-		private String dataNasc;
-		private String sexo;
-		//private int FKusario; 
+	public class DependenteUsuario extends Pessoa{
+		private String cpfTitular;
 		
-		public DependenteUsuario() {};
+		public DependenteUsuario() {
+			super();
+		};
 		
-		public DependenteUsuario(String cpf, String nome, String dataNasc, String sexo) {
-			this.cpf = cpf;
-			this.nome = nome;
-			this.dataNasc = dataNasc;
-			this.sexo = sexo;		
+		public DependenteUsuario(String cpf, String nome, String dataNasc, String sexo,
+				String email,  String telefone ) {
+			super(cpf, nome, dataNasc, sexo, email, telefone);
+		}
+
+		public String getCpfTitular() {
+			return this.cpfTitular;
+		}
+
+		public void setCpfTitular(String cpfTitular) {
+			this.cpfTitular = cpfTitular;
 		}
 		
-		public String getCpf() {
-			return cpf;
-		}
-		public String getNome() {
-			return nome;
-		}
-		public String getDataNasc() {
-			return dataNasc;
-		}
-		public String getSexo() {
-			return sexo;
-		}
-		public void setCpf(String cpf) {
-			this.cpf = cpf;
-		}
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
-		public void setDataNasc(String dataNasc) {
-			this.dataNasc = dataNasc;
-		}
-		public void setSexo(String sexo) {
-			this.sexo = sexo;
-		}
-				
+		
 }

@@ -9,7 +9,10 @@ public class Consulta {
 	
 	public Consulta() {};
 	
-	public Consulta(String FKmedico, String FKusuario) {
+	public Consulta(String FKmedico, String FKusuario, String hora, String data, boolean status) {
+		this.hora = hora;
+		this.data = data;
+		this.status = status;
 		this.FKmedico = FKmedico;
 		this.FKusuario = FKusuario;
 	}

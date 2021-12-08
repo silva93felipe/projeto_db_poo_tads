@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Usuario extends Pessoa {
 	private String endereco;
+	
 	  ArrayList<DependenteUsuario> dependentes = new ArrayList<DependenteUsuario>(); 
 	  
 	  public Usuario() {

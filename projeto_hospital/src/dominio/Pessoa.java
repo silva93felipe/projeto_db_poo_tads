@@ -23,7 +23,7 @@ package dominio;
 		}
 		
 		public String getCpf() {
-			return cpf;
+			return this.cpf;
 		}
 		
 		public void setCpf(String cpf) {
@@ -31,7 +31,7 @@ package dominio;
 		}
 		
 		public String getNome() {
-			return nome;
+			return this.nome;
 		}
 		
 		public void setNome(String nome) {
@@ -39,7 +39,7 @@ package dominio;
 		}
 		
 		public String getDataNasc() {
-			return dataNasc;
+			return this.dataNasc;
 		}
 		
 		public void setDataNasc(String dataNasc) {
@@ -47,7 +47,7 @@ package dominio;
 		}
 		
 		public String getSexo() {
-			return sexo;
+			return this.sexo;
 		}
 		
 		public void setSexo(String sexo) {
@@ -55,7 +55,7 @@ package dominio;
 		}
 		
 		public String getEmail() {
-			return email;
+			return this.email;
 		}
 		
 		public void setEmail(String email) {
@@ -63,7 +63,7 @@ package dominio;
 		}
 		
 		public String getTelefone() {
-			return telefone;
+			return this.telefone;
 		}
 		
 		public void setTelefone(String telefone) {
