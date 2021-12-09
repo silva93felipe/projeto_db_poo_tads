@@ -1,33 +1,24 @@
 package dominio;
 
 public class Medicamento implements RequisicaoMedica {
-	private int IdProduto;
-	private String IDlote;
 	private int quantidade;
+	private String IdProduto;
 	private String descricaProduto;
 	
 	public Medicamento() {}
 	
-	public Medicamento( int IdProduto, int quantidade, String descricaProduto) {
+	public Medicamento( int quantidade, String IdProduto, String descricaProduto) {
 		this.IdProduto = IdProduto;
 		this.quantidade = quantidade;
 		this.descricaProduto =  descricaProduto;
 	}
 	
-	public int getIdProduto() {
+	public String getIdProduto() {
 		return this.IdProduto;
 	}
 
-	public void setIdProduto(int idProduto) {
+	public void setIdProduto(String idProduto) {
 		this.IdProduto = idProduto;
-	}
-
-	public String getIDlote() {
-		return this.IDlote;
-	}
-
-	public void setIDlote(String iDlote) {
-		this.IDlote = iDlote;
 	}
 
 	public int getQuantidade() {
@@ -46,12 +37,12 @@ public class Medicamento implements RequisicaoMedica {
 		this.descricaProduto = descricaProduto;
 	}
 
-	public void retirada(int quantidade, int idProduto) {
+	public void retirada(int quantidade, String idProduto) {
 		if(this.quantidade - quantidade <= 0) {
 			System.out.println(this.descricaProduto + " nao tem saldo.");
 		}else {
 			this.quantidade -= quantidade;
-			System.out.println("Retidade de " + quantidade + "do produto " +  this.descricaProduto + " realizada.");			
+			System.out.println("Retirada de " + quantidade + " do produto " +  this.descricaProduto + " realizada.");			
 		}
 				
 	}

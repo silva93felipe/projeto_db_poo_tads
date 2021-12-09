@@ -38,12 +38,11 @@ public class Principal {
 						System.out.println("\n------------------------------------");
 						System.out.println("\n=============CLIENTE================");
 						System.out.println("\n------------------------------------");
-						System.out.println(" 1 - CADASTRAR USUÁRIO");
+						System.out.println(" 1 - CADASTRAR CLIENTE");
 						System.out.println(" 2 - CADASTRAR DEPENDENTE");
-						System.out.println(" 3 - MARCAR CONSULTA");   //pensando em remover
-						System.out.println(" 4 - CANCELAR CONSULTA"); //pensando em remover
-						System.out.println(" 5 - TODAS AS CONSULTAS PENDENTES");
-						System.out.println(" 6 - VOLTAR");
+						System.out.println(" 3 - MARCAR CONSULTA");   
+						System.out.println(" 4 - CONSULTAS MARCADAS");
+						System.out.println(" 5 - VOLTAR");
 						System.out.println("\n------------------------------------");
 						
 						opcaoCli = teclado.nextInt();
@@ -79,13 +78,13 @@ public class Principal {
 							for(int i = 0; i < users.size(); i++) {
 								if(users.get(i).getCpf().equals(user.getCpf())) {
 									achouUser = true;
-									System.out.println("Usuario ja cadastrado.");
+									System.out.println("Ops, Usuario ja cadastrado.");
 								}
 							}
 							
 							if(achouUser == false) {
 								users.add(user);
-								System.out.println("Usuario cadastrado com sucesso.");								
+								System.out.println("Cadastro realizado com sucesso.");								
 							}
 							
 							break;
@@ -103,9 +102,9 @@ public class Principal {
 							
 							if(achouUserDep == true) {
 								System.out.println("Titular encontrado.");
-								
+								System.out.println("=============Informacoes do dependente================");
 								DependenteUsuario dependente = new DependenteUsuario();
-								System.out.println("Informacoes do dependente... ");
+								
 								System.out.println("Digite o CPF (Sem os pontos): ");
 								dependente.setCpf(teclado.nextLine());		
 								
@@ -130,17 +129,21 @@ public class Principal {
 						
 						case 3:
 							boolean achouMedCon = false;
+							boolean achouDep = false;
 							boolean achouUserCon = false;
 							Consulta consulta = new Consulta();
 							
 							System.out.println("Digite a data da consulta: ");
 							consulta.setData(teclado.nextLine());
+							
 							System.out.println("Digite a hora da consulta: ");
-							consulta.setData(teclado.nextLine());
+							consulta.setHora(teclado.nextLine());
+							
 							System.out.println("Digite o CPF do medico: ");
 							consulta.setFKmedico(teclado.nextLine());
+							
 							for(int i = 0; i < medicos.size(); i++) {
-								if(medicos.get(i).equals(consulta.getFKmedico())) {
+								if(medicos.get(i).getCpf().equals(consulta.getFKmedico())) {
 									achouMedCon = true;
 								}
 							}
@@ -150,18 +153,24 @@ public class Principal {
 								consulta.setFKusuario(teclado.nextLine());
 								
 								for(int i = 0; i < users.size(); i++) {
-									if(users.get(i).equals(consulta.getFKusuario())) {
+									if(users.get(i).getCpf().equals(consulta.getFKusuario())) {
 										achouUserCon = true;
 									}
 								}
 								
-								if(achouUserCon) {
+								for(int i = 0; i < dependentes.size(); i++) {
+									if(dependentes.get(i).getCpf().equals(consulta.getFKusuario())) {
+										achouDep = true;
+									}
+								}
+								
+								if(achouUserCon || achouDep) {
 									consulta.setStatus(true);
 									consultas.add(consulta);
 									System.out.println("Consulta marcada.");									
 								}
 								
-								if(achouUserCon == false) {
+								if(achouUserCon == false && achouDep == false) {
 									System.out.println("Problema ao cadastrar a consulta, nem cliente encontrado.");
 								}
 							}
@@ -172,19 +181,27 @@ public class Principal {
 							
 							break;
 							
-						case 4: // pensando em remover
+						case 4: 
+							System.out.println("Digite o CPF do usuario: ");
+							String consultaMarcada = teclado.nextLine();
+							System.out.println("============Consultas============");
 							
-							System.out.println("Consulta cancelada...");
+							for(int i = 0; i < consultas.size(); i++) {
+								if(consultas.get(i).getFKusuario().equals(consultaMarcada)) {
+									if(consultas.get(i).getStatus() == true) {
+										System.out.println("Data " + consultas.get(i).getData() + " | " + "Hora " + consultas.get(i).getHora());										
+									}
+								}else {
+									System.out.println("Nenhuma consulta marcada.");									
+								}
+							}
+							
+							System.out.println("================================");
+
 							break;
-							
-						case 5: // pensando em remover
-							System.out.println("Suas consultas pendentes sao: ");
-							break;
-							
-						default: System.out.println("Opcao invalida...");
 						}
 						
-					}while(opcaoCli!=6);
+					}while(opcaoCli!=5);
 				
 				break;
 				
@@ -228,7 +245,7 @@ public class Principal {
 							for(int i = 0; i < medicos.size(); i++) {
 								if(medicos.get(i).getCpf().equals(medico.getCpf())) {
 									achouMedico = true;
-									System.out.println("Medico ja cadastrado.");
+									System.out.println("Ops, Medico ja cadastrado.");
 								}
 							}
 							
@@ -244,9 +261,9 @@ public class Principal {
 							System.out.println("Digite o CPF do medico (Sem os pontos): ");
 							String auxMedico = teclado.nextLine();
 							
-							System.out.println("=======Consultas=======");
+							System.out.println("============Consultas============");
 							for(int i = 0; i < consultas.size(); i++) {
-								if(consultas.get(i).getFKmedico() == auxMedico) {
+								if(consultas.get(i).getFKmedico().equals(auxMedico)) {
 									System.out.println("Data " + consultas.get(i).getData() + " | " + "Hora " + consultas.get(i).getHora());
 									temConsulta = true;
 								}
@@ -255,10 +272,8 @@ public class Principal {
 							if(temConsulta == false) {
 								System.out.println("Nenhuma consulta agendada.");
 							}
-							System.out.println("=======================");
+							System.out.println("================================");
 							break;
-						
-						default: System.out.println("Opcao invalida...");
 						}
 						
 					}while(opcaoMedico!=3);
@@ -272,7 +287,7 @@ public class Principal {
 						System.out.println("\n===========MEDICAMENTOS=============");
 						System.out.println("\n------------------------------------");
 						System.out.println("1 - CADASTRAR");
-						System.out.println("2 - CONSULTAR ESTOQUE");
+						System.out.println("2 - ESTOQUE");
 						System.out.println("3 - SOLICITAR");
 						System.out.println("4 - VOLTAR");
 						System.out.println("\n------------------------------------");
@@ -285,8 +300,7 @@ public class Principal {
 								Medicamento medicamento = new Medicamento();
 								
 								System.out.println("Digite codigo do produto: ");
-								medicamento.setIdProduto(teclado.nextInt());
-								teclado.nextLine();
+								medicamento.setIdProduto(teclado.nextLine());
 								
 								System.out.println("Digite o nome do produto: ");
 								medicamento.setDescricaProduto(teclado.nextLine());
@@ -296,10 +310,10 @@ public class Principal {
 								teclado.nextLine();
 								
 								boolean achouMedicamento = false;
-								for(int i = 0; i < medicos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto() == medicamento.getIdProduto()){
+								for(int i = 0; i < medicamentos.size(); i++) {
+									if(medicamentos.get(i).getIdProduto().equals(medicamento.getIdProduto())){
 										achouMedicamento = true;
-										System.out.println("Medicamento ja cadastrado.");
+										System.out.println("Ops, Medicamento ja cadastrado.");
 									}
 								}
 								
@@ -313,29 +327,12 @@ public class Principal {
 							case 2:
 								
 								System.out.println("Digite codigo do produto: ");
-								int codigoProd = teclado.nextInt();
-								teclado.nextLine();
+								String codigoProd = teclado.nextLine();
 								
 								for(int i = 0; i < medicamentos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto() == codigoProd){
+									if(medicamentos.get(i).getIdProduto().equals(codigoProd)){
 										System.out.println("O saldo do produto " + medicamentos.get(i).getDescricaProduto() + 
-												" eh : " + medicamentos.get(i).getQuantidade());
-									}
-								}
-								
-								break;
-								
-							case 3:
-								System.out.println("Digite codigo do produto: ");
-								int codigoProdReti = teclado.nextInt();
-								teclado.nextLine();
-								
-								for(int i = 0; i < medicamentos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto() == codigoProdReti){
-										System.out.println("Digite a quantidade: ");
-										int quantidade = teclado.nextInt();
-										teclado.nextLine();
-										medicamentos.get(i).retirada(codigoProdReti, quantidade);
+												" eh: " + medicamentos.get(i).getQuantidade());
 									}else {
 										System.out.println("Produto nao encontrado.");
 									}
@@ -343,20 +340,31 @@ public class Principal {
 								
 								break;
 								
-							default: System.out.println("Opcao invalida...");
+							case 3:
+								System.out.println("Digite codigo do produto: ");
+								String codigoProdReti = teclado.nextLine();
+								
+								for(int i = 0; i < medicamentos.size(); i++) {
+									if(medicamentos.get(i).getIdProduto().equals(codigoProdReti)){
+										System.out.println("Digite a quantidade: ");
+										int quantidade = teclado.nextInt();
+										teclado.nextLine();
+										medicamentos.get(i).retirada(quantidade, codigoProdReti);
+									}else {
+										System.out.println("Produto nao encontrado.");
+									}
+								}
+								
+								break;
 						}
 						
 					}while(opMedicament!=4);
 					
 					break;
-				
-				default: System.out.println("Opcao invalida...");
-				
 				}
 			
 		}while(opcaoMenu!=4);
 		
 		System.out.println("Fim do programa...");
 	 }
-
 }
