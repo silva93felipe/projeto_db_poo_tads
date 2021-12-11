@@ -3,6 +3,7 @@ package visao;
 
 import dominio.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -305,25 +306,27 @@ public class Principal {
 								System.out.println("Digite o nome do produto: ");
 								medicamento.setDescricaProduto(teclado.nextLine());
 								
-								System.out.println("Digite a quantidade: ");
-								medicamento.setQuantidade(teclado.nextInt());
-								teclado.nextLine();
-								
-								boolean achouMedicamento = false;
-								for(int i = 0; i < medicamentos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto().equals(medicamento.getIdProduto())){
-										achouMedicamento = true;
-										System.out.println("Ops, Medicamento ja cadastrado.");
+								try {
+									System.out.println("Digite a quantidade: ");
+									medicamento.setQuantidade(teclado.nextInt());
+									teclado.nextLine();	
+									
+									boolean achouMedicamento = false;
+									for(int i = 0; i < medicamentos.size(); i++) {
+										if(medicamentos.get(i).getIdProduto().equals(medicamento.getIdProduto())){
+											achouMedicamento = true;
+											System.out.println("Ops, Medicamento ja cadastrado.");
+										}
 									}
-								}
-								
-								if(achouMedicamento == false) {
-									medicamentos.add(medicamento);
-									System.out.println("Medicamento cadastrado com sucesso.");								
-								}
-
-								break;
-								
+									
+									if(achouMedicamento == false) {
+										medicamentos.add(medicamento);
+										System.out.println("Medicamento cadastrado com sucesso.");								
+									}
+									
+								}catch (InputMismatchException e) {
+									System.out.println("Falha, Digite apenas números." + e.getMessage());
+								}								
 							case 2:
 								
 								System.out.println("Digite codigo do produto: ");

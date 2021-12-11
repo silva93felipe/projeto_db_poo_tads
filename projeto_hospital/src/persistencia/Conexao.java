@@ -29,7 +29,7 @@ public class Conexao {
 	
 	public void desconectar() {
 		try {
-			con.close();
+			this.con.close();
 		}catch(Exception e) {
 			System.out.println("Problema ao desconectar do banco, " + e.getMessage());
 		}

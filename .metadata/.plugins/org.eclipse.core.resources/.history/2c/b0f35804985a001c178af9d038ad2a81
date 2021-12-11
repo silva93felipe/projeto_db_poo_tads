@@ -1,0 +1,24 @@
+package persistencia;
+
+import java.util.ArrayList;
+
+import dominio.Medico;
+
+public class ClinicaDAO {
+	private Conexao minhaConexao;
+	
+	private final String LSTARMEDICOS = "select * from \"Clinica\" where \"MedicoId\" = ?";
+	private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"MedicoId\" = ?";
+	
+	
+	public ClinicaDAO() {
+		this.minhaConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+	}
+	
+	public ArrayList<Medico> medicosAssociados(){
+		ArrayList<Medico> listaMedicos = new ArrayList<Medico>();
+		
+		
+	}
+
+}

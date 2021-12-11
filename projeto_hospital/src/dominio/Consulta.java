@@ -1,11 +1,17 @@
 package dominio;
 
+import java.util.ArrayList;
+
 public class Consulta {
 	private String hora;
 	private String data;
+	private boolean status;
+	
 	private String FKmedico;
 	private String FKusuario;
-	private boolean status;
+	
+	ArrayList<Medico> medicos = new ArrayList<Medico>();
+	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	public Consulta() {};
 	
@@ -17,10 +23,29 @@ public class Consulta {
 		this.FKusuario = FKusuario;
 	}
 
+	
+	
+	public String getFKmedico() {
+		return this.FKmedico;
+	}
+	
+	public void setFKmedico(String FKmedico ) {
+		this.FKmedico = FKmedico;
+	}
+	
+	public String getFKusuario() {
+		return this.FKusuario;
+	}
+	
+	public void setFKusuario(String fkUsuario) {
+		this.FKusuario = fkUsuario;
+	}
 	public String getHora() {
 		return this.hora;
 	}
 
+	
+	
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
@@ -33,21 +58,6 @@ public class Consulta {
 		this.data = data;
 	}
 
-	public String getFKmedico() {
-		return this.FKmedico;
-	}
-
-	public void setFKmedico(String FKmedico ) {
-		this.FKmedico = FKmedico;
-	}
-	
-	public String getFKusuario() {
-		return this.FKusuario;
-	}
-	
-	public void setFKusuario(String fkUsuario) {
-		this.FKusuario = fkUsuario;
-	}
 	
 	public boolean getStatus() {
 		return this.status;

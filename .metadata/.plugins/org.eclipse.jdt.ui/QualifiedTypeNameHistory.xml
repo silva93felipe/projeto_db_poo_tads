@@ -9,7 +9,11 @@
     <fullyQualifiedTypeName name="dominio.Usuario"/>
     <fullyQualifiedTypeName name="dominio.Pessoa"/>
     <fullyQualifiedTypeName name="dominio.DependenteUsuario"/>
-    <fullyQualifiedTypeName name="dominio.Medico"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="dominio.Medicamento"/>
+    <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="dominio.Medico"/>
+    <fullyQualifiedTypeName name="java.beans.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
 </qualifiedTypeNameHistroy>

@@ -1,6 +1,7 @@
 package dominio;
 
 public class Medico extends Pessoa {
+	public String especialidade;
 	
 	public Medico() {
 		super();
@@ -11,5 +12,14 @@ public class Medico extends Pessoa {
 	{
 		super(cpf, nome, dataNasc, sexo, email, telefone);
 	}
+	
+	public String getEspecialidade() {
+		return this.especialidade;
+	}
+
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+
 }
 
