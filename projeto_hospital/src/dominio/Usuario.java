@@ -3,7 +3,6 @@ package dominio;
 import java.util.ArrayList;
 
 public class Usuario extends Pessoa {
-	private String endereco;
 	
 	private String lagradouro;
 	private String cep;
@@ -16,6 +15,7 @@ public class Usuario extends Pessoa {
 	  
 	  public Usuario() {
 		  super();
+		  this.dependentes = new ArrayList<>();
 	  };
 	  
 	  public Usuario(String cpf, String nome, String dataNasc, String sexo,
@@ -27,19 +27,10 @@ public class Usuario extends Pessoa {
 		  this.cidade = cidade;
 		  this.UF = uf;
 		  this.numeroCasa = numeroCasa;
-	  }
-	  
-	  
-	  public String getEndereco() {
-		return endereco;
-	  }
-
-	  public void setEndereco(String endereco) {
-		this.endereco = endereco;
+		  
+		  this.dependentes = new ArrayList<>();
 	  }
 		
-		
-	
 	public String getLagradouro() {
 		return this.lagradouro;
 	}
@@ -87,4 +78,26 @@ public class Usuario extends Pessoa {
 	public void setNumeroCasa(String numeroCasa) {
 		this.numeroCasa = numeroCasa;
 	}
+	
+	//Metodos dos dependentes
+	
+	public void incluirDependente(DependenteUsuario d) {
+		this.dependentes.add(d);
+	}
+	
+	public DependenteUsuario consultarDependente(String cpf) {
+		for(int i = 0; i < this.dependentes.size(); i++) {
+			if(this.dependentes.get(i).getCpf() == cpf) {
+				return this.dependentes.get(i);
+			}
+		}
+		return null;
+	}
+	
+	public void excluirDependente(DependenteUsuario d) {
+		this.dependentes.remove(d);
+	}
+	
+	//Metodos dos dependentes
+	
 }

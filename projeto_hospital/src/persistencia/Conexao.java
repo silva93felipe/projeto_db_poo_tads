@@ -20,7 +20,7 @@ public class Conexao {
 		try {
 			Class.forName("org.postgresql.Driver"); //Carregar o driver
 			this.con = DriverManager.getConnection(this.caminho, this.usuario, this.senha); //cria a conexao com os dados
-			System.out.println("Conexao realizada com sucesso...");
+//			System.out.println("Conexao realizada com sucesso...");
 			
 		}catch(Exception e) {
 			System.out.print("Erro na conexao: " + e.getMessage());

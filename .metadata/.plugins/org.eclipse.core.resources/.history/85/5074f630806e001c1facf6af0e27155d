@@ -1,0 +1,52 @@
+package persistencia;
+
+import java.sql.PreparedStatement;
+
+import dominio.Medicamento;
+import dominio.Usuario;
+
+public class UsuarioDAO {
+	
+	private Conexao usuarioConexao;
+	
+	private final String BURCARUSUARIO = "select * from \"Usuario\" where \"cpfUsuario\" = ?";
+	private final String TODOSUSUARIO = "select * from \"Usuario\" ";
+	private final String CADASTRARUSUARIO = "insert into \"Usuario\" (\"cpfUsuario\", \"nomeUsuario\", \"dataNascimentoUsuario\", "
+			                                + " \"sexoUsuario\", \"emailUsuario\", \"telefoneUsuario\", \"lagradouroUsuario\", "
+			                                + " \"cepUsuario\", \"bairroUsuario\", \"cidadeUsuario\", \"ufUsuario\", \"numeroCasaUsuario\") " 
+			                                + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	public UsuarioDAO() {
+		this.usuarioConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+	}
+	
+	public void incluirUsuario(Usuario usuario) {
+		try {
+			this.usuarioConexao.conectar();
+			
+			PreparedStatement instrucao = usuarioConexao.getConexao().prepareStatement(CADASTRARUSUARIO);
+			
+			instrucao.setString(1, usuario.getCpf());
+			instrucao.setString(2, usuario.getNome());
+			instrucao.setString(3, usuario.getDataNasc());
+			instrucao.setString(4, usuario.getSexo());
+			instrucao.setString(5, usuario.getEmail());
+			instrucao.setString(6, usuario.getTelefone());
+			instrucao.setString(7, usuario.getLagradouro());
+			instrucao.setString(8, usuario.getCep());
+			instrucao.setString(9, usuario.getBairro());
+			instrucao.setString(10, usuario.getCidade());
+			instrucao.setString(11, usuario.getUF());
+			instrucao.setString(12, usuario.getNumeroCasa());
+			
+			
+			instrucao.execute();
+			usuarioConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+		
+	}
+
+}

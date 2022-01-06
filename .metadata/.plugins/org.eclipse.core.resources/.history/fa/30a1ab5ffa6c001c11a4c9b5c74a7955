@@ -1,0 +1,44 @@
+package persistencia;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import dominio.Medico;
+
+public class MedicoDAO {
+
+private Conexao medicoConexao;
+	
+	private final String LISTAMEDICO = "select * from \"Clinica\" where \"MedicoId\" = ?";
+	private final String CADASTRARMEDICO = "insert into \"Medico\" (\"cpfMedico\", \"nomeMedico\", )"
+	private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"Especialidade\" = ?";
+	
+	
+	public MedicoDAO() {
+		this.medicoConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+	}
+	
+	public ArrayList<Medico> medicosAssociados(){
+		ArrayList<Medico> listaMedicos = new ArrayList<Medico>();
+		
+		try {
+			this.medicoConexao.conectar();
+			
+			Statement instrucao = medicoConexao.getConexao().createStatement(); 
+			
+			ResultSet rs = instrucao.executeQuery(LISTAMEDICO); // quando é um select usar o executeQuery
+			while(rs.next()) {
+				Medico medico = new Medico(rs.getString("cpf"), rs.getString("nome"), rs.getString("dataNasc"), rs.getString("sexo"), rs.getString("email"), rs.getString("telefone"));
+				listaMedicos.add(medico);
+			}
+			
+			medicoConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao desconectar do banco: " + e.getMessage());
+		}
+		
+		return listaMedicos;
+	}
+}

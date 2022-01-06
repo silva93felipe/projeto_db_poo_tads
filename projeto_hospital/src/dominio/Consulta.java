@@ -6,25 +6,35 @@ public class Consulta {
 	private String hora;
 	private String data;
 	private boolean status;
-	
-	private String FKmedico;
-	private String FKusuario;
-	
+		
 	ArrayList<Medico> medicos = new ArrayList<Medico>();
 	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
-	public Consulta() {};
+	//tirar para implementar arrayList
+	private String FKmedico;
+	private String FKusuario;
+	//tirar para implementar arrayList
+	
+	public Consulta() {
+		this.medicos = new ArrayList<>();
+		this.usuarios = new ArrayList<>();
+	};
 	
 	public Consulta(String FKmedico, String FKusuario, String hora, String data, boolean status) {
 		this.hora = hora;
 		this.data = data;
 		this.status = status;
+		
+		this.medicos = new ArrayList<>();
+		this.usuarios = new ArrayList<>();
+		
+		//tirar para implementar arrayList
 		this.FKmedico = FKmedico;
 		this.FKusuario = FKusuario;
+		//tirar para implementar arrayList
 	}
-
 	
-	
+	//tirar para implementar arrayList
 	public String getFKmedico() {
 		return this.FKmedico;
 	}
@@ -43,8 +53,7 @@ public class Consulta {
 	public String getHora() {
 		return this.hora;
 	}
-
-	
+	//tirar para implementar arrayList
 	
 	public void setHora(String hora) {
 		this.hora = hora;
@@ -65,6 +74,12 @@ public class Consulta {
 	
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public void disponibildadeConsulta(String hora, String data, Medico medico) {
+		if((this.hora == hora) && (this.data == data) && (this.medicos.equals(medico))) {
+			
+		}
 	}
 	
 }

@@ -1,0 +1,47 @@
+package persistencia;
+
+import java.sql.PreparedStatement;
+
+import dominio.DependenteUsuario;
+import dominio.Usuario;
+
+public class DependenteDAO {
+	
+private Conexao dependenteConexao;
+	
+	private final String BURCARDEPENDENTE = "select * from \"DependenteUsuario\" where \"cpfUsuario\" = ?";
+	private final String TODOSDEPENDENTE = "select * from \"DependenteUsuario\" ";
+	private final String CADASTRARDEPENDENTE = "insert into \"DependenteUsuario\" (\"cpfDependente\", \"nomeDependente\", "
+			                                + " \"sexoDependente\", \"emailDependente\", \"telefoneDependente\", \"cpfUsuario\", "
+			                                + " \"dataNascimentoDependente\") " 
+			                                + " values (?, ?, ?, ?, ?, ?, ?)";
+	
+	public DependenteDAO() {
+		this.dependenteConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+	}
+	
+	public void incluirDependente(DependenteUsuario dependente) {
+		try {
+			this.dependenteConexao.conectar();
+			
+			PreparedStatement instrucao = dependenteConexao.getConexao().prepareStatement(CADASTRARDEPENDENTE);
+			
+			instrucao.setString(1, dependente.getCpf());
+			instrucao.setString(2, dependente.getNome());
+			instrucao.setString(3, dependente.getSexo());
+			instrucao.setString(4, dependente.getEmail());
+			instrucao.setString(5, dependente.getTelefone());
+			
+			instrucao.setString(12, dependente.getDataNasc());
+			
+			
+			instrucao.execute();
+			dependenteConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+		
+	}
+
+}
