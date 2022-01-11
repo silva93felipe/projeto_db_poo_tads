@@ -2,11 +2,6 @@ package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-import dominio.Medicamento;
-import dominio.Medico;
 import dominio.Usuario;
 
 public class UsuarioDAO {
@@ -14,7 +9,6 @@ public class UsuarioDAO {
 	private Conexao usuarioConexao;
 	
 	private final String BURCARUSUARIO = "select * from \"Usuario\" where \"cpfUsuario\" = ?";
-	private final String TODOSUSUARIO = "select * from \"Usuario\" ";
 	private final String CADASTRARUSUARIO = "insert into \"Usuario\" (\"cpfUsuario\", \"nomeUsuario\", "
 			                                + " \"sexoUsuario\", \"emailUsuario\", \"telefoneUsuario\", \"lagradouroUsuario\", "
 			                                + " \"cepUsuario\", \"bairroUsuario\", \"cidadeUsuario\", \"ufUsuario\", \"numeroCasaUsuario\", \"dataNascimentoUsuario\") " 
