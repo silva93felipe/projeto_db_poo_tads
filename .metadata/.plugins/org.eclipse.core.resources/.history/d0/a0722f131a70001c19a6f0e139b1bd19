@@ -1,0 +1,66 @@
+package persistencia;
+
+import java.sql.PreparedStatement;
+
+import dominio.Medicamento;
+import dominio.Usuario;
+
+public class UsuarioDAO {
+	
+	private Conexao usuarioConexao;
+	
+	private final String BURCARUSUARIO = "select * from \"Usuario\" where \"cpfUsuario\" = ?";
+	private final String TODOSUSUARIO = "select * from \"Usuario\" ";
+	private final String CADASTRARUSUARIO = "insert into \"Usuario\" (\"cpfUsuario\", \"nomeUsuario\", "
+			                                + " \"sexoUsuario\", \"emailUsuario\", \"telefoneUsuario\", \"lagradouroUsuario\", "
+			                                + " \"cepUsuario\", \"bairroUsuario\", \"cidadeUsuario\", \"ufUsuario\", \"numeroCasaUsuario\", \"dataNascimentoUsuario\") " 
+			                                + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	public UsuarioDAO() {
+		this.usuarioConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+	}
+	
+	public void incluirUsuario(Usuario usuario) {
+		try {
+			this.usuarioConexao.conectar();
+			
+			PreparedStatement instrucao = usuarioConexao.getConexao().prepareStatement(CADASTRARUSUARIO);
+			
+			instrucao.setString(1, usuario.getCpf());
+			instrucao.setString(2, usuario.getNome());
+			instrucao.setString(3, usuario.getSexo());
+			instrucao.setString(4, usuario.getEmail());
+			instrucao.setString(5, usuario.getTelefone());
+			instrucao.setString(6, usuario.getLagradouro());
+			instrucao.setString(7, usuario.getCep());
+			instrucao.setString(8, usuario.getBairro());
+			instrucao.setString(9, usuario.getCidade());
+			instrucao.setString(10, usuario.getUF());
+			instrucao.setString(11, usuario.getNumeroCasa());
+			instrucao.setString(12, usuario.getDataNasc());
+			
+			
+			instrucao.execute();
+			usuarioConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+	}
+	
+	public void buscarUsuario(String cpf) {
+		try {
+			this.usuarioConexao.conectar();
+			
+			PreparedStatement instrucao = usuarioConexao.getConexao().prepareStatement(BURCARUSUARIO);
+			
+			instrucao.executeQuery();
+			
+			this.usuarioConexao.desconectar();
+			
+		}catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+	}
+
+}
