@@ -8,7 +8,7 @@ package dominio;
 		};
 		
 		public DependenteUsuario(String cpf, String nome, String dataNasc, String sexo,
-				String email,  String telefone ) {
+				String email,  String telefone, String cpfTitular ) {
 			super(cpf, nome, dataNasc, sexo, email, telefone);
 		}
 

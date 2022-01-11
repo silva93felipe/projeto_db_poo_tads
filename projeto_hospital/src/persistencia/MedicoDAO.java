@@ -6,16 +6,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dominio.Medico;
+import dominio.Usuario;
 
 public class MedicoDAO {
 
-private Conexao medicoConexao;
+	private Conexao medicoConexao;
 	
 	private final String BUSCARMEDICO = "select * from \"Medico\" where \"cpfMedico\" = ?";
 	private final String BUSCATODOSMEDICOS = "select * from \"Medico\" ";
 	private final String CADASTRARMEDICO = "insert into \"Medico\" (\"cpfMedico\", \"nomeMedico\", \"dataNascimentoMedico\", \"sexoMedico\", "
 			                                + " \"emailMedico\", \"telefoneMedico\") values (?, ?, ?, ?, ?, ?)";
-	
 	
 	//private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"Especialidade\" = ?";
 	
@@ -23,8 +23,6 @@ private Conexao medicoConexao;
 	public MedicoDAO() {
 		this.medicoConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
 	}
-	
-//	public buscarMedico() {}
 	
 	public ArrayList<Medico> medicosAssociados(){
 		ArrayList<Medico> listaMedicos = new ArrayList<Medico>();
@@ -52,6 +50,7 @@ private Conexao medicoConexao;
 	}
 	
 	public void incluirMedico(Medico medico) {
+		
 		try {
 			this.medicoConexao.conectar();
 			
@@ -70,6 +69,32 @@ private Conexao medicoConexao;
 		} catch (Exception e) {
 			System.out.println("Erro ao incluir no banco: " + e.getMessage());
 		}
+		
+	}
+	
+	public Medico bucarMedico(String cpfMedico) {
+		Medico medico = null;
+		
+		try {
+			this.medicoConexao.conectar();
+			
+			PreparedStatement instrucao = medicoConexao.getConexao().prepareStatement(BUSCARMEDICO);
+			
+			instrucao.setString(1, cpfMedico);
+			
+			ResultSet rs = instrucao.executeQuery();
+			
+			if(rs.next()) {
+				medico = new Medico(rs.getString("cpfMedico"), rs.getString("nomeMedico"), rs.getString("sexoMedico"), rs.getString("emailMedico"), rs.getString("telefoneMedico"), 
+											rs.getString("dataNascimentoMedico"));
+			}
+			medicoConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+		
+		return medico;
 		
 	}
 }

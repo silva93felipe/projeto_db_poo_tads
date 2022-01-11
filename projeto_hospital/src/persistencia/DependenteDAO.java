@@ -1,15 +1,18 @@
 package persistencia;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import dominio.DependenteUsuario;
+import dominio.Medico;
 import dominio.Usuario;
 
 public class DependenteDAO {
 	
 private Conexao dependenteConexao;
 	
-	private final String BURCARDEPENDENTE = "select * from \"DependenteUsuario\" where \"cpfUsuario\" = ?";
+	private final String BURCARDEPENDENTE = "select * from \"DependenteUsuario\" where \"cpfDependente\" = ?";
+	
 	private final String TODOSDEPENDENTE = "select * from \"DependenteUsuario\" ";
 	private final String CADASTRARDEPENDENTE = "insert into \"DependenteUsuario\" (\"cpfDependente\", \"nomeDependente\", "
 			                                + " \"sexoDependente\", \"emailDependente\", \"telefoneDependente\", \"cpfUsuario\", "
@@ -40,6 +43,32 @@ private Conexao dependenteConexao;
 		} catch (Exception e) {
 			System.out.println("Erro ao incluir no banco: " + e.getMessage());
 		}
+		
+	}
+	
+	public DependenteUsuario bucarDependente(String cpfDependente) {
+		DependenteUsuario dependente = null;
+		
+		try {
+			this.dependenteConexao.conectar();
+			
+			PreparedStatement instrucao = dependenteConexao.getConexao().prepareStatement(BURCARDEPENDENTE);
+			
+			instrucao.setString(1, cpfDependente);
+			
+			ResultSet rs = instrucao.executeQuery();
+			
+			if(rs.next()) {
+				dependente = new DependenteUsuario (rs.getString("cpfDependente"), rs.getString("nomeDependente"), rs.getString("sexoDependente"), rs.getString("emailDependente"), 
+												   rs.getString("telefoneDependente"), rs.getString("cpfUsuario"), rs.getString("dataNascimentoDependente"));
+			}
+			dependenteConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+		
+		return dependente;
 		
 	}
 

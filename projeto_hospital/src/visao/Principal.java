@@ -9,6 +9,7 @@ import dominio.DependenteUsuario;
 import dominio.Medicamento;
 import dominio.Medico;
 import dominio.Usuario;
+import persistencia.ConsultaDAO;
 import persistencia.DependenteDAO;
 import persistencia.MedicamentoDAO;
 import persistencia.MedicoDAO;
@@ -28,7 +29,19 @@ public class Principal {
 		MedicamentoDAO medDAO = new MedicamentoDAO();
 		UsuarioDAO userDAO = new UsuarioDAO();
 		DependenteDAO depDAO = new DependenteDAO();
-			
+		ConsultaDAO conDAO = new ConsultaDAO();
+		MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
+		
+		//Variaveis auxiliares
+		String cpfUserAux, cpfDepAux, cpfMedAux, codProdAux;
+		
+		Usuario user = new Usuario();
+		DependenteUsuario dependente = new DependenteUsuario();
+		Medico medico = new Medico();
+		Consulta consulta = new Consulta();
+		Medicamento medicamento = new Medicamento();
+		
+		
 		int opcaoMenu, opcaoCli, opcaoMedico, opMedicament;
 		
 		Scanner teclado = new Scanner(System.in);
@@ -64,86 +77,92 @@ public class Principal {
 						switch(opcaoCli) { 
 						
 						case 1:
-							Usuario user = new Usuario();
 							
 							System.out.println("Digite o CPF (Sem os pontos): ");
-							user.setCpf(teclado.nextLine());
 							
-							System.out.println("Digite o nome: ");
-							user.setNome(teclado.nextLine());
+							cpfUserAux = teclado.nextLine();
+							user = userDAO.buscarUsuario(cpfUserAux);
 							
-							System.out.println("Digite a data de nascimento: ");
-							user.setDataNasc(teclado.nextLine());
-
-							System.out.println("Digite o sexo (M / F): ");
-							user.setSexo(teclado.nextLine());
+							if (user != null) {
+								System.out.println("Ops, Usuario ja cadastrado.");
+								break;
+							}
 							
-							System.out.println("Digite o email: ");
-							user.setEmail(teclado.nextLine());
-							
-							System.out.println("Digite o telefone (Apenas numeros): ");
-							user.setTelefone(teclado.nextLine());
-							
-							System.out.println("Digite o lagradouro: ");
-							user.setLagradouro(teclado.nextLine());
-							
-							System.out.println("Digite o CEP (Apenas numeros): ");
-							user.setCep(teclado.nextLine());
-							
-							System.out.println("Digite o nome do bairro: ");
-							user.setBairro(teclado.nextLine());
-							
-							System.out.println("Digite o nome da cidade: ");
-							user.setCidade(teclado.nextLine());
-							
-							System.out.println("Digite o nome do estado: ");
-							user.setUF(teclado.nextLine());
-							
-							System.out.println("Digite o numero da casa:  ");
-							user.setNumeroCasa(teclado.nextLine());
-							
-							userDAO.incluirUsuario(user);
-							System.out.println("Cadastro realizado com sucesso.");
-							
-//							System.out.println("Digite o endereco: ");
-//							user.setEndereco(teclado.nextLine()); 
-//							boolean achouUser = false;
-//							for(int i = 0; i < users.size(); i++) {
-//								if(users.get(i).getCpf().equals(user.getCpf())) {
-//									achouUser = true;
-//									System.out.println("Ops, Usuario ja cadastrado.");
-//								}
-//							}
-//							
-//							if(achouUser == false) {
-//								users.add(user);
-//								System.out.println("Cadastro realizado com sucesso.");								
-							//}
+							if(user == null) {
+								
+								user = new Usuario();
+								
+								user.setCpf(cpfUserAux);
+								
+								System.out.println("Digite o nome: ");
+								user.setNome(teclado.nextLine());
+								
+								System.out.println("Digite a data de nascimento: ");
+								user.setDataNasc(teclado.nextLine());
+	
+								System.out.println("Digite o sexo (M / F): ");
+								user.setSexo(teclado.nextLine());
+								
+								System.out.println("Digite o email: ");
+								user.setEmail(teclado.nextLine());
+								
+								System.out.println("Digite o telefone (Apenas numeros): ");
+								user.setTelefone(teclado.nextLine());
+								
+								System.out.println("Digite o lagradouro: ");
+								user.setLagradouro(teclado.nextLine());
+								
+								System.out.println("Digite o CEP (Apenas numeros): ");
+								user.setCep(teclado.nextLine());
+								
+								System.out.println("Digite o nome do bairro: ");
+								user.setBairro(teclado.nextLine());
+								
+								System.out.println("Digite o nome da cidade: ");
+								user.setCidade(teclado.nextLine());
+								
+								System.out.println("Digite o nome do estado: ");
+								user.setUF(teclado.nextLine());
+								
+								System.out.println("Digite o numero da casa:  ");
+								user.setNumeroCasa(teclado.nextLine());
+								
+								userDAO.incluirUsuario(user);
+								
+								System.out.println("Cadastro realizado com sucesso.");
+							}
 							
 							break;
-							
+	
 						case 2:
-//							boolean achouUserDep = false;
-//							System.out.println("Digite o CPF do titular (Sem os pontos): ");
-//							String auxTitularCpf = teclado.nextLine();
-//							
-//							for(int i = 0; i < users.size(); i++) {
-//								if(users.get(i).getCpf().equals(auxTitularCpf)) {
-//									achouUserDep = true;
-//								}
-//							}
 							
-//							if(achouUserDep == true) {
-//								System.out.println("Titular encontrado.");
+							System.out.println("Digite o CPF do titular (Sem os pontos): ");
+							cpfUserAux = teclado.nextLine();
+							user = userDAO.buscarUsuario(cpfUserAux);
+							
+							if(user == null) {
+								System.out.println("Titular não encontrado.");
+								break;
+							}
+							
+							System.out.println("Digite o CPF do dependente (Sem os pontos): ");
+							cpfDepAux = teclado.nextLine();
+							dependente = depDAO.bucarDependente(cpfDepAux);
+							
+							if(dependente != null) {
+								System.out.println("Dependente já cadastrado.");
+								break;
+							}
+								
+							if (user != null && dependente == null) {
+								System.out.println("Titular encontrado.");
 								System.out.println("=============Informacoes do dependente================");
-								DependenteUsuario dependente = new DependenteUsuario();
+								dependente = new DependenteUsuario();
 								
-								System.out.println("Digite o CPF do titular: ");
-								dependente.setCpfTitular(teclado.nextLine());
+								dependente.setCpfTitular(cpfUserAux);
 								
-								System.out.println("Digite o CPF (Sem os pontos): ");
-								dependente.setCpf(teclado.nextLine());		
-								
+								dependente.setCpf(cpfDepAux);
+		
 								System.out.println("Digite o nome: ");
 								dependente.setNome(teclado.nextLine());				
 								
@@ -160,72 +179,54 @@ public class Principal {
 								dependente.setDataNasc(teclado.nextLine());
 								
 								depDAO.incluirDependente(dependente);
+								
 								System.out.println("Dependente cadastrado com sucesso.");
-//							}
-							
-//							if(achouUserDep == false) {
-//								System.out.println("Titular não encontrado.");								
-//							}
+							}
 							
 							break;
 						
 						case 3:
-							boolean achouMedCon = false;
-							boolean achouDep = false;
-							boolean achouUserCon = false;
-							Consulta consulta = new Consulta();
+
+							System.out.println("Digite o CPF do medico (Sem os pontos): ");
+							cpfMedAux = teclado.nextLine();
+							medico = mDAO.bucarMedico(cpfMedAux);
+							
+							if(medico == null) {
+								System.out.println("Problema ao cadastrar a consulta, medico não encontrado.");
+								break;
+							}
+							
+							System.out.println("Digite o CPF do usuario (Sem os pontos): ");
+							cpfUserAux = teclado.nextLine();
+							user = userDAO.buscarUsuario(cpfUserAux);
+							dependente = depDAO.bucarDependente(cpfUserAux);
+							
+							if(user == null && dependente == null) {
+								System.out.println("Problema ao cadastrar a consulta, nenhum usuario encontrado.");
+								break;
+							}
+							
+							consulta.setFKusuario(cpfUserAux);
+							consulta.setFKmedico(cpfMedAux);
 							
 							System.out.println("Digite a data da consulta: ");
 							consulta.setData(teclado.nextLine());
 							
 							System.out.println("Digite a hora da consulta: ");
 							consulta.setHora(teclado.nextLine());
-							
-							System.out.println("Digite o CPF do medico: ");
-							consulta.setFKmedico(teclado.nextLine());
-							
-							for(int i = 0; i < medicos.size(); i++) {
-								if(medicos.get(i).getCpf().equals(consulta.getFKmedico())) {
-									achouMedCon = true;
-								}
-							}
-							
-							if(achouMedCon) {
-								System.out.println("Digite o CPF do usuario: ");
-								consulta.setFKusuario(teclado.nextLine());
-								
-								for(int i = 0; i < users.size(); i++) {
-									if(users.get(i).getCpf().equals(consulta.getFKusuario())) {
-										achouUserCon = true;
-									}
-								}
-								
-								for(int i = 0; i < dependentes.size(); i++) {
-									if(dependentes.get(i).getCpf().equals(consulta.getFKusuario())) {
-										achouDep = true;
-									}
-								}
-								
-								if(achouUserCon || achouDep) {
-									consulta.setStatus(true);
-									consultas.add(consulta);
-									System.out.println("Consulta marcada.");									
-								}
-								
-								if(achouUserCon == false && achouDep == false) {
-									System.out.println("Problema ao cadastrar a consulta, nem cliente encontrado.");
-								}
-							}
-							
-							if(achouMedCon == false) {
-								System.out.println("Problema ao cadastrar a consulta, nem medico encontrado.");
-							}
+
+							System.out.println("Consulta marcada.");									
 							
 							break;
 							
 						case 4: 
-							System.out.println("Digite o CPF do usuario: ");
-							String consultaMarcada = teclado.nextLine();
+							System.out.println("Digite o CPF do usuario (Sem os pontos): ");
+							cpfUserAux = teclado.nextLine();
+							
+							// FALTA IMPLEMENTAR
+							consulta = conDAO.
+							
+							if()
 							System.out.println("============Consultas============");
 							
 							for(int i = 0; i < consultas.size(); i++) {
@@ -263,10 +264,18 @@ public class Principal {
 						switch(opcaoMedico) {
 						case 1:
 							
-							Medico medico = new Medico();
+							System.out.println("Digite o CPF do medico (Sem os pontos): ");
+							cpfMedAux = teclado.nextLine();
+							medico = mDAO.bucarMedico(cpfMedAux);
 							
-							System.out.println("Digite o CPF (Sem os pontos): ");
-							medico.setCpf(teclado.nextLine());
+							if(medico != null) {
+								System.out.println("Medico ja cadastrado.");
+								break;
+							}
+							
+							medico = new Medico();
+						
+							medico.setCpf(cpfMedAux);
 							
 							System.out.println("Digite o nome: ");
 							medico.setNome(teclado.nextLine());				
@@ -290,21 +299,22 @@ public class Principal {
 							break;
 								
 						case 2:
-							boolean temConsulta = false;
 							System.out.println("Digite o CPF do medico (Sem os pontos): ");
-							String auxMedico = teclado.nextLine();
+							cpfMedAux = teclado.nextLine();
+							consultas = conDAO.todasConsultasMedico(cpfMedAux);
+							
+							if(cpfMedAux == null) {
+								System.out.println("Nenhuma consulta agendada.");
+								break;
+							}
 							
 							System.out.println("============Consultas============");
-							for(int i = 0; i < consultas.size(); i++) {
-								if(consultas.get(i).getFKmedico().equals(auxMedico)) {
-									System.out.println("Data " + consultas.get(i).getData() + " | " + "Hora " + consultas.get(i).getHora());
-									temConsulta = true;
-								}
-							}
+							for( int i=0; i < consultas.size(); i++){
+		                        System.out.println("-------------------------------");
+		                        System.out.println("DATA: " + consultas.get(i).getData());
+		                        System.out.println("HORA: " + consultas.get(i).getHora());
+		                    }
 							
-							if(temConsulta == false) {
-								System.out.println("Nenhuma consulta agendada.");
-							}
 							System.out.println("================================");
 							break;
 						}
@@ -330,54 +340,43 @@ public class Principal {
 						
 						switch(opMedicament) {
 							case 1:
-								Medicamento medicamento = new Medicamento();
-								
 								System.out.println("Digite codigo do produto: ");
-								medicamento.setIdProduto(teclado.nextLine());
+								codProdAux = teclado.nextLine();
+								medicamento = medicamentoDAO.bucarMedicamento(codProdAux);
+								
+								if(medicamento != null) {
+									System.out.println("Ops, Medicamento ja cadastrado.");
+									break;
+								}
+								
+								medicamento = new Medicamento();
+								
+								medicamento.setIdProduto(codProdAux);
 								
 								System.out.println("Digite o nome do produto: ");
 								medicamento.setDescricaProduto(teclado.nextLine());
 								
 								System.out.println("Digite a quantidade: ");
 								medicamento.setQuantidade(teclado.nextInt());
-//								teclado.nextLine();
 								
 								medDAO.incluirMedicamento(medicamento);
 								System.out.println("Medicamento cadastrado com sucesso.");
 								
-//								try {
-//									
-//									boolean achouMedicamento = false;
-//									for(int i = 0; i < medicamentos.size(); i++) {
-//										if(medicamentos.get(i).getIdProduto().equals(medicamento.getIdProduto())){
-//											achouMedicamento = true;
-//											System.out.println("Ops, Medicamento ja cadastrado.");
-//										}
-//									}
-//									
-//									if(achouMedicamento == false) {
-//										medicamentos.add(medicamento);
-//										System.out.println("Medicamento cadastrado com sucesso.");								
-//									}
-//									
-//								}catch (InputMismatchException e) {
-//									System.out.println("Falha, Digite apenas números." + e.getMessage());
-//								}
-								
 								break;
 							case 2:
-								
+								int saldoAtual = 0;
 								System.out.println("Digite codigo do produto: ");
-								String codigoProd = teclado.nextLine();
+								codProdAux = teclado.nextLine();
+								medicamento = medicamentoDAO.bucarMedicamento(codProdAux);
 								
-								for(int i = 0; i < medicamentos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto().equals(codigoProd)){
-										System.out.println("O saldo do produto " + medicamentos.get(i).getDescricaProduto() + 
-												" eh: " + medicamentos.get(i).getQuantidade());
-									}else {
-										System.out.println("Produto nao encontrado.");
-									}
+								if(medicamento == null) {
+									System.out.println("Ops, Medicamento nao encontrado.");
+									break;
 								}
+								
+								saldoAtual = medicamentoDAO.estoque(codProdAux);
+								
+								System.out.println("Saldo atual do produto e: " + saldoAtual);
 								
 								break;
 								

@@ -1,8 +1,12 @@
 package persistencia;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import dominio.Medicamento;
+import dominio.Medico;
 import dominio.Usuario;
 
 public class UsuarioDAO {
@@ -39,14 +43,37 @@ public class UsuarioDAO {
 			instrucao.setString(11, usuario.getNumeroCasa());
 			instrucao.setString(12, usuario.getDataNasc());
 			
-			
 			instrucao.execute();
 			usuarioConexao.desconectar();
 			
 		} catch (Exception e) {
 			System.out.println("Erro ao incluir no banco: " + e.getMessage());
 		}
+	}
+	
+	public Usuario buscarUsuario(String cpf) {
+		Usuario user = null;
+	
+		try {
+			this.usuarioConexao.conectar();
+			
+			PreparedStatement instrucao = usuarioConexao.getConexao().prepareStatement(BURCARUSUARIO);
+			instrucao.setString(1, cpf);
+			
+			ResultSet rs = instrucao.executeQuery();
+			
+			if(rs.next()) {
+				user = new Usuario(rs.getString("cpfUsuario"), rs.getString("nomeUsuario"), rs.getString("dataNascimentoUsuario"), rs.getString("sexoUsuario"), rs.getString("emailUsuario"), 
+											rs.getString("telefoneUsuario"), rs.getString("lagradouroUsuario"), rs.getString("cepUsuario"), rs.getString("bairroUsuario"), rs.getString("cidadeUsuario"),
+											rs.getString("ufUsuario"), rs.getString("numeroCasaUsuario"));
+			}
+			
+			this.usuarioConexao.desconectar();
+		}catch (Exception e) {
+			System.out.println("Erro ao mostrar informacoes: " + e.getMessage());
+		}
 		
+		return user;
 	}
 
 }
