@@ -1,7 +1,6 @@
 package visao;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dominio.Consulta;
@@ -18,13 +17,9 @@ import persistencia.UsuarioDAO;
 public class Principal {
 
 	public static void main(String[] args) {
-		ArrayList<Usuario> users = new ArrayList<Usuario>();
-		ArrayList<Medico> medicos = new ArrayList<Medico>();
-		ArrayList<DependenteUsuario> dependentes = new ArrayList<DependenteUsuario>();
 		ArrayList<Consulta> consultas = new ArrayList<Consulta>();
-		ArrayList<Medicamento> medicamentos = new ArrayList<Medicamento>();
 		
-		//Objetos DAO
+		// Objetos DAO
 		MedicoDAO mDAO = new MedicoDAO();
 		MedicamentoDAO medDAO = new MedicamentoDAO();
 		UsuarioDAO userDAO = new UsuarioDAO();
@@ -32,7 +27,7 @@ public class Principal {
 		ConsultaDAO conDAO = new ConsultaDAO();
 		MedicamentoDAO medicamentoDAO = new MedicamentoDAO();
 		
-		//Variaveis auxiliares
+		// Variaveis auxiliares
 		String cpfUserAux, cpfDepAux, cpfMedAux, codProdAux;
 		
 		Usuario user = new Usuario();
@@ -41,8 +36,7 @@ public class Principal {
 		Consulta consulta = new Consulta();
 		Medicamento medicamento = new Medicamento();
 		
-		
-		int opcaoMenu, opcaoCli, opcaoMedico, opMedicament;
+		int opcaoMenu, opcaoCli, opcaoMedico, opMedicament, retiradaProd;
 		
 		Scanner teclado = new Scanner(System.in);
 		
@@ -145,6 +139,8 @@ public class Principal {
 								break;
 							}
 							
+							System.out.println("Titular encontrado.");
+							
 							System.out.println("Digite o CPF do dependente (Sem os pontos): ");
 							cpfDepAux = teclado.nextLine();
 							dependente = depDAO.bucarDependente(cpfDepAux);
@@ -155,8 +151,8 @@ public class Principal {
 							}
 								
 							if (user != null && dependente == null) {
-								System.out.println("Titular encontrado.");
 								System.out.println("=============Informacoes do dependente================");
+								
 								dependente = new DependenteUsuario();
 								
 								dependente.setCpfTitular(cpfUserAux);
@@ -214,7 +210,11 @@ public class Principal {
 							
 							System.out.println("Digite a hora da consulta: ");
 							consulta.setHora(teclado.nextLine());
-
+							
+							consulta.setStatus(true);
+							
+							conDAO.cadastrarConsulta(consulta);
+							
 							System.out.println("Consulta marcada.");									
 							
 							break;
@@ -223,25 +223,27 @@ public class Principal {
 							System.out.println("Digite o CPF do usuario (Sem os pontos): ");
 							cpfUserAux = teclado.nextLine();
 							
-							// FALTA IMPLEMENTAR
-							consulta = conDAO.
+							consultas = conDAO.todasConsultasUsuario(cpfUserAux);
 							
-							if()
-							System.out.println("============Consultas============");
-							
-							for(int i = 0; i < consultas.size(); i++) {
-								if(consultas.get(i).getFKusuario().equals(consultaMarcada)) {
-									if(consultas.get(i).getStatus() == true) {
-										System.out.println("Data " + consultas.get(i).getData() + " | " + "Hora " + consultas.get(i).getHora());										
-									}
-								}else {
-									System.out.println("Nenhuma consulta marcada.");									
-								}
+							if(consultas.size() == 0) {
+								System.out.println("Nenhuma consulta agendada.");
+								break;
 							}
 							
-							System.out.println("================================");
-
+							for( int i=0; i < consultas.size(); i++){
+								if(consultas.get(i).getStatus() == true) {
+									System.out.println("============Consultas============");
+									System.out.println("-------------------------------");
+									System.out.println("DATA: " + consultas.get(i).getData());
+									System.out.println("HORA: " + consultas.get(i).getHora());
+									System.out.println("-------------------------------");
+									System.out.println("================================");
+								}
+		                    }
+							
 							break;
+							
+							
 						}
 						
 					}while(opcaoCli!=5);
@@ -301,21 +303,25 @@ public class Principal {
 						case 2:
 							System.out.println("Digite o CPF do medico (Sem os pontos): ");
 							cpfMedAux = teclado.nextLine();
+							
 							consultas = conDAO.todasConsultasMedico(cpfMedAux);
 							
-							if(cpfMedAux == null) {
+							if(consultas.size() == 0) {
 								System.out.println("Nenhuma consulta agendada.");
 								break;
 							}
 							
-							System.out.println("============Consultas============");
 							for( int i=0; i < consultas.size(); i++){
-		                        System.out.println("-------------------------------");
-		                        System.out.println("DATA: " + consultas.get(i).getData());
-		                        System.out.println("HORA: " + consultas.get(i).getHora());
+								if(consultas.get(i).getStatus() == true) {
+									System.out.println("============Consultas============");
+									System.out.println("-------------------------------");
+									System.out.println("DATA: " + consultas.get(i).getData());
+									System.out.println("HORA: " + consultas.get(i).getHora());
+									System.out.println("-------------------------------");
+									System.out.println("================================");
+								}
 		                    }
 							
-							System.out.println("================================");
 							break;
 						}
 						
@@ -363,6 +369,7 @@ public class Principal {
 								System.out.println("Medicamento cadastrado com sucesso.");
 								
 								break;
+								
 							case 2:
 								int saldoAtual = 0;
 								System.out.println("Digite codigo do produto: ");
@@ -382,18 +389,33 @@ public class Principal {
 								
 							case 3:
 								System.out.println("Digite codigo do produto: ");
-								String codigoProdReti = teclado.nextLine();
+								codProdAux = teclado.nextLine();
+								medicamento = medicamentoDAO.bucarMedicamento(codProdAux);
 								
-								for(int i = 0; i < medicamentos.size(); i++) {
-									if(medicamentos.get(i).getIdProduto().equals(codigoProdReti)){
-										System.out.println("Digite a quantidade: ");
-										int quantidade = teclado.nextInt();
-										teclado.nextLine();
-										medicamentos.get(i).retirada(quantidade, codigoProdReti);
-									}else {
-										System.out.println("Produto nao encontrado.");
-									}
+								if(medicamento == null) {
+									System.out.println("Ops, Medicamento nao encontrado.");
+									break;
 								}
+								
+								System.out.println("Digite a quantidade para retirada:  ");
+								retiradaProd = teclado.nextInt();
+								
+								saldoAtual = medicamentoDAO.estoque(codProdAux);
+								
+								if(saldoAtual < retiradaProd) {
+									System.out.println("Produto com saldo insuficiente.");
+									break;
+								}
+								
+								if(saldoAtual - retiradaProd < 0) {
+									System.out.println("Nao pode fazer retirada maior que o saldo.");
+									break;
+								}
+								
+								//TESTAR A RETIRADA
+								
+								medicamentoDAO.retirada(codProdAux, retiradaProd);
+								System.out.println("Retirada efetuada com Sucesso.");
 								
 								break;
 						}

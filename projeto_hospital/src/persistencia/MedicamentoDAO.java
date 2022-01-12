@@ -2,21 +2,18 @@ package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 import dominio.Medicamento;
-import dominio.Medico;
 
 public class MedicamentoDAO {
 	
 	private Conexao medicamentoConexao;
 	
-	private final String ESTOQUE = "select SUM(\"quantidadeMedicamento\") AS \"quantidade\" from \"Medicamento\" where \"idMedicamento\" = ?";
+	private final String ESTOQUE = "select \"quantidadeMedicamento\" from \"Medicamento\" where \"idMedicamento\" = ?";
 	private final String BURCARMEDICAMENTO = "select * from \"Medicamento\" where \"idMedicamento\" = ?";
-	private final String TODOSMEDICAMENTOS = "select * from \"Medicamento\" ";
 	private final String CADASTRARMEDICAMENTO = "insert into \"Medicamento\" (\"idMedicamento\", \"descricaoMedicamento\", \"quantidadeMedicamento\") "
 			                                + " values (?, ?, ?)";
+	
+	private final String RETIRADA = "UPDATE \"Medicamento\" SET \"quantidadeMedicamento\" = \"quantidadeMedicamento\" - ? WHERE \"idMedicamento\" = ?";
 	
 	public MedicamentoDAO() {
 		this.medicamentoConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
@@ -79,7 +76,7 @@ public class MedicamentoDAO {
 			ResultSet rs = instrucao.executeQuery();
 			
 			if(rs.next()) {
-				quantidade = rs.getInt("quantidade");
+				quantidade = rs.getInt("quantidadeMedicamento");
 			}
 			medicamentoConexao.desconectar();
 			
@@ -88,6 +85,24 @@ public class MedicamentoDAO {
 		}
 		
 		return quantidade;
+	}
+	
+	
+	public void retirada(String idProd, int qtdPro) {
+		try {
+			this.medicamentoConexao.conectar();
+			
+			PreparedStatement instrucao = medicamentoConexao.getConexao().prepareStatement(RETIRADA);
+			
+			instrucao.setInt(1, qtdPro);
+			instrucao.setString(2, idProd);
+			
+			instrucao.execute();
+			medicamentoConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
 		
 	}
 

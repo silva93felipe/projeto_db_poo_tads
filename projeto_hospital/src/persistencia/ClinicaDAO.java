@@ -10,7 +10,8 @@ public class ClinicaDAO {
 	private Conexao clinicaConexao;
 	
 	private final String LISTAMEDICOS = "select * from \"Clinica\" where \"MedicoId\" = ?";
-	private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"Especialidade\" = ?";
+	
+//	private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"Especialidade\" = ?";
 	
 	
 	public ClinicaDAO() {

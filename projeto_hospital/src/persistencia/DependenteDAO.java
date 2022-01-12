@@ -2,10 +2,7 @@ package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import dominio.DependenteUsuario;
-import dominio.Medico;
-import dominio.Usuario;
 
 public class DependenteDAO {
 	
@@ -13,7 +10,6 @@ private Conexao dependenteConexao;
 	
 	private final String BURCARDEPENDENTE = "select * from \"DependenteUsuario\" where \"cpfDependente\" = ?";
 	
-	private final String TODOSDEPENDENTE = "select * from \"DependenteUsuario\" ";
 	private final String CADASTRARDEPENDENTE = "insert into \"DependenteUsuario\" (\"cpfDependente\", \"nomeDependente\", "
 			                                + " \"sexoDependente\", \"emailDependente\", \"telefoneDependente\", \"cpfUsuario\", "
 			                                + " \"dataNascimentoDependente\") " 

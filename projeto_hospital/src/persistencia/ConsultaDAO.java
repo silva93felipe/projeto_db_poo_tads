@@ -2,11 +2,9 @@ package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import dominio.Consulta;
-import dominio.Medico;
 
 public class ConsultaDAO {
 	
@@ -16,12 +14,15 @@ public class ConsultaDAO {
 	
 	private final String BUSCARCONSULTASUSUARIO = "select * from \"Consulta\" where \"cpfUsuario\" = ?";
 	
+	private final String CADASTRARCONSULTA = "INSERT INTO \"Consulta\" (\"statusConsulta\", \"cpfMedico\", \"cpfUsuario\", \"dataConsulta\", "
+											+ " \"horaConsulta\") VALUES (?, ?, ?, ?, ?)";
+	
 	public ConsultaDAO() {
 		this.consultaConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
 	}
 	
 	public ArrayList<Consulta> todasConsultasMedico(String cpfMedico){
-		ArrayList<Consulta> listaConsultaMedico = null;
+		ArrayList<Consulta> listaConsultaMedico = new ArrayList<Consulta>();
 		
 		try {
 			this.consultaConexao.conectar();
@@ -32,7 +33,7 @@ public class ConsultaDAO {
 			
 			ResultSet rs = instrucao.executeQuery();
 			
-			while(rs.next()) {
+			if(rs.next()) {
 				Consulta consulta = new Consulta(rs.getString("horaConsulta"), rs.getString("dataConsulta"), rs.getBoolean("statusConsulta"), 
 										rs.getString("cpfMedico"), rs.getString("cpfUsuario"));
 				
@@ -46,6 +47,56 @@ public class ConsultaDAO {
 		}
 		
 		return listaConsultaMedico;
+	}
+	
+	
+	public ArrayList<Consulta> todasConsultasUsuario(String cpfUsuario){
+		ArrayList<Consulta> listaConsultaUsuario = new ArrayList<Consulta>();
+		
+		try {
+			this.consultaConexao.conectar();
+			
+			PreparedStatement instrucao = consultaConexao.getConexao().prepareStatement(BUSCARCONSULTASUSUARIO); 
+			
+			instrucao.setString(1, cpfUsuario);
+			
+			ResultSet rs = instrucao.executeQuery();
+			
+			if(rs.next()) {
+				Consulta consulta = new Consulta(rs.getString("horaConsulta"), rs.getString("dataConsulta"), rs.getBoolean("statusConsulta"), 
+						rs.getString("cpfMedico"), rs.getString("cpfUsuario"));
+				
+				listaConsultaUsuario.add(consulta);
+			}
+			
+			consultaConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao desconectar do banco: " + e.getMessage());
+		}
+		
+		return listaConsultaUsuario;
+	}
+	
+	public void cadastrarConsulta(Consulta consulta) {
+		try {
+			this.consultaConexao.conectar();
+			
+			PreparedStatement instrucao = consultaConexao.getConexao().prepareStatement(CADASTRARCONSULTA);
+			
+			instrucao.setBoolean(1, consulta.getStatus());
+			instrucao.setString(2, consulta.getFKmedico());
+			instrucao.setString(3, consulta.getFKusuario());
+			instrucao.setString(4, consulta.getData());
+			instrucao.setString(5, consulta.getHora());
+			
+			instrucao.execute();
+			consultaConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao incluir no banco: " + e.getMessage());
+		}
+		
 	}
 
 }
