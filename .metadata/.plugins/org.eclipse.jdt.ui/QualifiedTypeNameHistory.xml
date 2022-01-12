@@ -18,7 +18,7 @@
     <fullyQualifiedTypeName name="dominio.Usuario"/>
     <fullyQualifiedTypeName name="dominio.Consulta"/>
     <fullyQualifiedTypeName name="dominio.DependenteUsuario"/>
-    <fullyQualifiedTypeName name="persistencia.ConsultaDAO"/>
     <fullyQualifiedTypeName name="persistencia.MedicamentoDAO"/>
     <fullyQualifiedTypeName name="dominio.Medicamento"/>
+    <fullyQualifiedTypeName name="persistencia.ConsultaDAO"/>
 </qualifiedTypeNameHistroy>
