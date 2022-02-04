@@ -22,6 +22,16 @@ package dominio;
 			this.telefone = telefone;
 		}
 		
+		public Pessoa(String cpf, String nome, String dataNasc, String telefone ) {
+			this.cpf =  cpf;
+			this.nome = nome;
+			this.dataNasc = dataNasc;
+			this.sexo = "null";
+			this.email = "null";
+			this.telefone = telefone;
+		}
+
+
 		public String getCpf() {
 			return this.cpf;
 		}

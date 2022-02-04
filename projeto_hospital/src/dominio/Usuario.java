@@ -31,6 +31,15 @@ public class Usuario extends Pessoa {
 		  this.dependentes = new ArrayList<>();
 	  }
 		
+	public Usuario(String cpf, String nome, String dataNasc, String telefone) {
+		  
+		  super(cpf, nome, dataNasc, telefone);
+		  this.cep = "null";
+		  this.cidade = "null";
+		  //this.dependentes = new ArrayList<>();
+	}
+
+
 	public String getLagradouro() {
 		return this.lagradouro;
 	}

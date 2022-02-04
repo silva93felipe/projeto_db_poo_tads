@@ -13,7 +13,7 @@ public class GUIhospital extends Application {
 	public void start(Stage stagePrincipal) throws Exception {
        
 		
-        Parent root = FXMLLoader.load(getClass().getResource("WindowH.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Gui955.fxml"));
         Scene scene = new Scene(root); 
         stagePrincipal.setScene(scene); 
         stagePrincipal.setTitle("Hospital");

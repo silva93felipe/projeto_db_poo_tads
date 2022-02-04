@@ -16,7 +16,7 @@ private Conexao dependenteConexao;
 			                                + " values (?, ?, ?, ?, ?, ?, ?)";
 	
 	public DependenteDAO() {
-		this.dependenteConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+		this.dependenteConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "niko123");
 	}
 	
 	public void incluirDependente(DependenteUsuario dependente) {
