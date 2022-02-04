@@ -13,9 +13,9 @@
 
 <AnchorPane fx:id="ancora" prefHeight="471.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.Gui955Controller">
    <children>
-      <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="397.0" prefWidth="691.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="471.0" prefWidth="691.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="Cliente">
                <content>
                   <Pane prefHeight="405.0" prefWidth="691.0">
                      <children>
@@ -67,7 +67,51 @@
                      </children>
                   </Pane>
                </content></Tab>
-          <Tab text="Untitled Tab 2" />
+          <Tab text="Consulta">
+               <content>
+                  <Pane prefHeight="405.0" prefWidth="691.0">
+                     <children>
+                        <TitledPane fx:id="TitletPaneConsu" animated="false" layoutY="7.0" prefHeight="204.0" prefWidth="691.0" text="Marcar Consulta">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="689.0">
+                                 <children>
+                                    <Button fx:id="btnCadConsu" layoutX="577.0" layoutY="141.0" mnemonicParsing="false" onAction="#listenerBtnCadConsu" text="Marcar Consulta" />
+                                    <TextField fx:id="FieldIdCosu" layoutX="77.0" layoutY="26.0" prefHeight="25.0" prefWidth="55.0" promptText="12345" />
+                                    <Label layoutX="38.0" layoutY="30.0" text="id" />
+                                    <Label layoutX="275.0" layoutY="73.0" text="Horario" />
+                                    <Label layoutX="34.0" layoutY="73.0" text="Data" />
+                                    <Label layoutX="405.0" layoutY="30.0" prefHeight="17.0" prefWidth="63.0" text="CpfUsuario" />
+                                    <Label layoutX="178.0" layoutY="30.0" text="CpfMedico" />
+                                    <TextField fx:id="FieldHoraConsu" layoutX="345.0" layoutY="69.0" prefHeight="25.0" prefWidth="96.0" />
+                                    <TextField fx:id="FieldCpfCliConsu" layoutX="495.0" layoutY="26.0" prefHeight="25.0" prefWidth="110.0" />
+                                    <TextField fx:id="FieldCpfMedConsu" layoutX="256.0" layoutY="26.0" prefHeight="25.0" prefWidth="117.0" />
+                                    <TextField fx:id="FieldataConsu" layoutX="77.0" layoutY="69.0" prefHeight="25.0" prefWidth="94.0" promptText="dd-mm-aaaa" />
+                                    <Label fx:id="labelAvConsu" layoutX="162.0" layoutY="145.0" prefHeight="17.0" prefWidth="333.0" text="Label" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <TitledPane fx:id="TitletPaneCli11" animated="false" layoutY="211.0" prefHeight="204.0" prefWidth="691.0" text="Buscar Cliente">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="38.0" layoutY="25.0" text="Cpf do usuario" />
+                                    <TextField fx:id="FieldcpfCliConsubus" layoutX="130.0" layoutY="21.0" prefHeight="25.0" prefWidth="124.0" promptText="12345" />
+                                    <TableView fx:id="tableConsu" layoutX="305.0" layoutY="35.0" prefHeight="131.0" prefWidth="346.0">
+                                       <columns>
+                                          <TableColumn fx:id="colDataConsu" prefWidth="107.0" text="Data" />
+                                          <TableColumn fx:id="colhoraConsu" prefWidth="100.0" text="Horario" />
+                                          <TableColumn fx:id="colCpfMedConsu" prefWidth="137.0" text="Cpf Do médico" />
+                                       </columns>
+                                    </TableView>
+                                    <Button fx:id="btnBuscConsu" layoutX="130.0" layoutY="75.0" mnemonicParsing="false" onAction="#listenerBtnBuscConsu" text="Buscar" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </Pane>
+               </content></Tab>
         </tabs>
       </TabPane>
    </children>

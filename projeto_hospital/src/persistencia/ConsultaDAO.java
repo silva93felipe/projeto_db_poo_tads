@@ -5,20 +5,24 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import dominio.Consulta;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class ConsultaDAO {
 	
 	private Conexao consultaConexao;
 	
-	private final String BUSCARCONSULTASMEDICOS = "select * from \"Consulta\" where \"cpfMedico\" = ?";
+	private final String BUSCARCONSULTASMEDICOS = "select * FROM consulta where \"cpfMedico\" = ?";
 	
-	private final String BUSCARCONSULTASUSUARIO = "select * from \"Consulta\" where \"cpfUsuario\" = ?";
+	//private final String BUSCARPORID = "SELECT idconsulta FROM consulta WHERE idconsulta = ?";
 	
-	private final String CADASTRARCONSULTA = "INSERT INTO \"Consulta\" (\"statusConsulta\", \"cpfMedico\", \"cpfUsuario\", \"dataConsulta\", "
-											+ " \"horaConsulta\") VALUES (?, ?, ?, ?, ?)";
+	private final String BUSCARCONSULTASUSUARIO = "SELECT dataconsulta,horaconsulta,cpfmedico from Consulta where \"cpfusuario\" = ?";
+	
+	private final String CADASTRARCONSULTA = "INSERT INTO Consulta ( idconsulta,statusConsulta, cpfMedico, cpfUsuario, dataConsulta, "
+											+ " horaConsulta) VALUES (?,?, ?, ?, ?, ?)";
 	
 	public ConsultaDAO() {
-		this.consultaConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+		this.consultaConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "niko123");
 	}
 	
 	public ArrayList<Consulta> todasConsultasMedico(String cpfMedico){
@@ -50,8 +54,8 @@ public class ConsultaDAO {
 	}
 	
 	
-	public ArrayList<Consulta> todasConsultasUsuario(String cpfUsuario){
-		ArrayList<Consulta> listaConsultaUsuario = new ArrayList<Consulta>();
+	public ObservableList<Consulta> todasConsultasUsuario(String cpfUsuario){
+		ObservableList<Consulta> listaConsultaUsuario = FXCollections.observableArrayList();
 		
 		try {
 			this.consultaConexao.conectar();
@@ -63,8 +67,8 @@ public class ConsultaDAO {
 			ResultSet rs = instrucao.executeQuery();
 			
 			if(rs.next()) {
-				Consulta consulta = new Consulta(rs.getString("horaConsulta"), rs.getString("dataConsulta"), rs.getBoolean("statusConsulta"), 
-						rs.getString("cpfMedico"), rs.getString("cpfUsuario"));
+				Consulta consulta = new Consulta(rs.getString("dataconsulta"), rs.getString("horaconsulta"),
+						rs.getString("cpfmedico"));
 				
 				listaConsultaUsuario.add(consulta);
 			}
@@ -79,16 +83,19 @@ public class ConsultaDAO {
 	}
 	
 	public void cadastrarConsulta(Consulta consulta) {
+		
+		
 		try {
 			this.consultaConexao.conectar();
 			
 			PreparedStatement instrucao = consultaConexao.getConexao().prepareStatement(CADASTRARCONSULTA);
 			
-			instrucao.setBoolean(1, consulta.getStatus());
-			instrucao.setString(2, consulta.getFKmedico());
-			instrucao.setString(3, consulta.getFKusuario());
-			instrucao.setString(4, consulta.getData());
-			instrucao.setString(5, consulta.getHora());
+			instrucao.setInt(1, consulta.getId());
+			instrucao.setBoolean(2, consulta.getStatus());
+			instrucao.setString(3, consulta.getFKmedico());
+			instrucao.setString(4, consulta.getFKusuario());
+			instrucao.setString(5, consulta.getData());
+			instrucao.setString(6, consulta.getHora());
 			
 			instrucao.execute();
 			consultaConexao.desconectar();
@@ -99,4 +106,26 @@ public class ConsultaDAO {
 		
 	}
 
+	/*public boolean existeConsu(String id) {
+		boolean ex=true;
+		try {
+			this.consultaConexao.conectar();
+			
+			PreparedStatement instrucao = consultaConexao.getConexao().prepareStatement(BUSCARPORID); 
+			//conversão?
+			instrucao.setString(1, id);
+			
+			ResultSet rs = instrucao.executeQuery();
+			
+			if(rs == null) 
+				ex = false;
+			
+			consultaConexao.desconectar();
+			
+		} catch (Exception e) {
+			System.out.println("Erro ao desconectar do banco: " + e.getMessage());
+		}
+		return ex;
+	
+	}*/
 }

@@ -6,8 +6,17 @@ public class Consulta {
 	private boolean status;
 	private String FKmedico;
 	private String FKusuario;
+	private int Id;
 
 	
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
 	public Consulta() {
 		
 	};
@@ -21,8 +30,13 @@ public class Consulta {
 
 	}
 	
-	public String getFKmedico() {
-		return this.FKmedico;
+	public Consulta(String hora, String data, String FKmedico) {
+		this.hora = hora;
+		this.data = data;
+		this.status = false;
+		this.FKmedico = FKmedico;
+		this.FKusuario = "null";
+
 	}
 	
 	public void setFKmedico(String FKmedico ) {
@@ -58,6 +72,11 @@ public class Consulta {
 	
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	public String getFKmedico() {
+		
+		return this.FKmedico;
 	}
 	
 }
