@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane fx:id="Ancora" prefHeight="507.0" prefWidth="515.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.Gui955parteIIIController">
+   <children>
+      <Pane layoutY="1.0" prefHeight="507.0" prefWidth="515.0">
+         <children>
+            <DialogPane contentText="     Bucar ou  cadastrar novo médico no sistema" headerText="                                               Médicos" layoutX="78.0" layoutY="14.0" prefHeight="63.0" prefWidth="360.0" />
+            <Label fx:id="LabelAvCadmed" layoutX="104.0" layoutY="104.0" text="Cadastro:" />
+            <Label layoutX="62.0" layoutY="142.0" text="nome comlpeto" />
+            <Label layoutX="244.0" layoutY="194.0" text="email" />
+            <Label layoutX="62.0" layoutY="194.0" text="Telefone" />
+            <Label layoutX="291.0" layoutY="142.0" text="CPF" />
+            <Line endX="259.0" layoutX="189.0" layoutY="84.0" startX="-122.0" />
+            <TextField fx:id="fieldNome" layoutX="160.0" layoutY="138.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="FieldCPF" layoutX="327.0" layoutY="138.0" prefHeight="25.0" prefWidth="111.0" />
+            <TextField fx:id="fieldTelefone" layoutX="128.0" layoutY="190.0" prefHeight="25.0" prefWidth="95.0" />
+            <TextField fx:id="fieldEmail" layoutX="291.0" layoutY="190.0" prefHeight="25.0" prefWidth="111.0" />
+            <Label layoutX="209.0" layoutY="323.0" text="CPF" />
+            <Label fx:id="LabelAvbusca" layoutX="90.0" layoutY="323.0" text="Busca por medico" />
+            <Label layoutX="67.0" layoutY="234.0" text="Data Nasc" />
+            <TextField fx:id="fieldBUscaCPF" layoutX="258.0" layoutY="319.0" prefHeight="25.0" prefWidth="95.0" />
+            <TextField fx:id="FielddataNasc" layoutX="142.0" layoutY="230.0" prefHeight="25.0" prefWidth="111.0" />
+            <Line endX="259.0" layoutX="189.0" layoutY="293.0" startX="-122.0" />
+            <TableView fx:id="tebMed" layoutX="60.0" layoutY="361.0" prefHeight="116.0" prefWidth="396.0">
+              <columns>
+                <TableColumn fx:id="colNome" prefWidth="102.0" text="nome" />
+                <TableColumn fx:id="colDatanas" prefWidth="84.0" text="data nasc" />
+                  <TableColumn fx:id="colEmail" prefWidth="103.0" text="email" />
+                  <TableColumn fx:id="colTelefone" prefWidth="105.0" text="telefone" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnBuscar" layoutX="376.0" layoutY="319.0" mnemonicParsing="false" onAction="#listenerBtnBuscar" text="Buscar" />
+            <Button fx:id="btnCad" layoutX="376.0" layoutY="100.0" mnemonicParsing="false" onAction="#listenerBtnCad" text="Cadastro" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

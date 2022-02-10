@@ -13,6 +13,12 @@ public class Medico extends Pessoa {
 		super(cpf, nome, dataNasc, sexo, email, telefone);
 	}
 	
+	//tabela
+	public Medico(String nome, String dataNasc, String email,  String telefone)
+	{
+		Pessoa3(nome, dataNasc, email, telefone);
+	}
+
 	public String getEspecialidade() {
 		return this.especialidade;
 	}

@@ -12,6 +12,18 @@ package dominio;
 			super(cpf, nome, dataNasc, sexo, email, telefone);
 		}
 
+		public DependenteUsuario(String cpf, String nome, String sexo, String cpfTitular,
+				 String dataNasc) {
+			super(cpf, nome, dataNasc, sexo);
+			this.cpfTitular = cpfTitular;
+		}
+
+		public DependenteUsuario(String nome, String sexo, String cpfTitular,
+				 String dataNasc) {
+			super(nome, dataNasc, sexo);
+			this.cpfTitular = cpfTitular;
+		}
+
 		public String getCpfTitular() {
 			return this.cpfTitular;
 		}

@@ -10,7 +10,7 @@ package dominio;
 	  
 	  public Pessoa() {};
 	  
-	
+	  //usuario
 		public Pessoa(String cpf, String nome, String dataNasc, String sexo,
 				String email,  String telefone ) 
 		{
@@ -21,17 +21,41 @@ package dominio;
 			this.email = email;
 			this.telefone = telefone;
 		}
-		
-		public Pessoa(String cpf, String nome, String dataNasc, String telefone ) {
-			this.cpf =  cpf;
+		//dependente
+		public Pessoa(String nome, String dataNasc, String sexo) 
+		{
+			this.cpf =  "null";
 			this.nome = nome;
 			this.dataNasc = dataNasc;
-			this.sexo = "null";
+			this.sexo = sexo;
 			this.email = "null";
+			this.telefone = "null";
+		}
+		//tabela
+		public  void Pessoa2(String cpf, String nome, String dataNasc, String telefone ) {
+			this.cpf = cpf;
+			this.nome = nome;
+			this.dataNasc = dataNasc;
 			this.telefone = telefone;
 		}
 
 
+		public Pessoa(String cpf, String nome, String dataNasc, String sexo) {
+			this.cpf =  cpf;
+			this.nome = nome;
+			this.dataNasc = dataNasc;
+			this.sexo = sexo;
+			this.email = "null";
+			this.telefone = "null";
+		}
+		
+		public void Pessoa3 (String nome,String dataNasc,String email,String telefone) {			
+			this.nome = nome;
+			this.dataNasc = dataNasc;			
+			this.email = email;
+			this.telefone = telefone;
+		}
+		
 		public String getCpf() {
 			return this.cpf;
 		}

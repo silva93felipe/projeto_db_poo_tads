@@ -10,16 +10,16 @@ public class MedicoDAO {
 
 	private Conexao medicoConexao;
 	
-	private final String BUSCARMEDICO = "select * from \"Medico\" where \"cpfMedico\" = ?";
-	private final String BUSCATODOSMEDICOS = "select * from \"Medico\" ";
-	private final String CADASTRARMEDICO = "insert into \"Medico\" (\"cpfMedico\", \"nomeMedico\", \"dataNascimentoMedico\", \"sexoMedico\", "
-			                                + " \"emailMedico\", \"telefoneMedico\") values (?, ?, ?, ?, ?, ?)";
+	private final String BUSCARMEDICO = "select nomeMedico,dataNascimentoMedico,emailMedico,telefoneMedico from Medico where cpfMedico = ?";
+	private final String BUSCATODOSMEDICOS = "select * from Medico ";
+	private final String CADASTRARMEDICO = "insert into Medico (cpfMedico, nomeMedico, dataNascimentoMedico,"
+			                                + " emailMedico, telefoneMedico) values (?, ?, ?, ?, ?)";
 	
-	//private final String LISTAESPECIALIDADE = "select * from \"Clinica\" where \"Especialidade\" = ?";
+	//private final String LISTAESPECIALIDADE = "select * from Clinica where Especialidade = ?";
 	
 	
 	public MedicoDAO() {
-		this.medicoConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "root");
+		this.medicoConexao = new Conexao("jdbc:postgresql://localhost:5432/hospital", "postgres", "niko123");
 	}
 	
 	public ArrayList<Medico> medicosAssociados(){
@@ -30,7 +30,7 @@ public class MedicoDAO {
 			
 			Statement instrucao = medicoConexao.getConexao().createStatement(); 
 			
-			ResultSet rs = instrucao.executeQuery(BUSCATODOSMEDICOS); // quando é um select usar o executeQuery
+			ResultSet rs = instrucao.executeQuery(BUSCATODOSMEDICOS); // quando ï¿½ um select usar o executeQuery
 			
 			while(rs.next()) {
 				Medico medico = new Medico(rs.getString("cpfMedico"), rs.getString("nomeMedico"), 
@@ -56,10 +56,10 @@ public class MedicoDAO {
 			
 			instrucao.setString(1, medico.getCpf());
 			instrucao.setString(2, medico.getNome());
-			instrucao.setString(4, medico.getSexo());
-			instrucao.setString(5, medico.getEmail());
-			instrucao.setString(6, medico.getTelefone());
 			instrucao.setString(3, medico.getDataNasc());
+			instrucao.setString(4, medico.getEmail());
+			instrucao.setString(5, medico.getTelefone());
+			
 			
 			instrucao.execute();
 			medicoConexao.desconectar();
@@ -83,8 +83,8 @@ public class MedicoDAO {
 			ResultSet rs = instrucao.executeQuery();
 			
 			if(rs.next()) {
-				medico = new Medico(rs.getString("cpfMedico"), rs.getString("nomeMedico"), rs.getString("sexoMedico"), rs.getString("emailMedico"), rs.getString("telefoneMedico"), 
-											rs.getString("dataNascimentoMedico"));
+				medico = new Medico(rs.getString("nomeMedico"), rs.getString("dataNascimentoMedico"), 
+						 rs.getString("emailMedico"), rs.getString("telefoneMedico"));
 			}
 			medicoConexao.desconectar();
 			

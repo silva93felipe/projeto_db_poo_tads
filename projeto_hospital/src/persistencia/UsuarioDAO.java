@@ -9,7 +9,7 @@ public class UsuarioDAO {
 	private Conexao usuarioConexao;
 	
 	private final String BURCARUSUARIO = "SELECT cpfusuario, nomeUsuario, sexoUsuario, telefoneUsuario, dataNascimentoUsuario FROM usuario where \"cpfusuario\" = ?";
-	private final String CADASTRARUSUARIO = "insert into usuario (cpfUsuario, nomeUsuario, "
+	private final String CADASTRARUSUARIO = "insert into usuario (cpfUsuario, nomeUsuario, sexoUsuario, "
 			                                + "emailUsuario, telefoneUsuario, "
 			                                + "cepUsuario, cidadeUsuario,dataNascimentoUsuario) " 
 			                                + "values (?, ?, ?, ?, ?, ?, ?, ?)";

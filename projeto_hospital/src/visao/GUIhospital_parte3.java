@@ -8,15 +8,15 @@ import javafx.stage.Stage;
 
 
 
-public class GUIhospital extends Application {
+public class GUIhospital_parte3 extends Application {
 	@Override
 	public void start(Stage stagePrincipal) throws Exception {
        
 		
-        Parent root = FXMLLoader.load(getClass().getResource("Gui955.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Gui955parteIII.fxml"));
         Scene scene = new Scene(root); 
         stagePrincipal.setScene(scene); 
-        stagePrincipal.setTitle("Hospital-Usuario/Consulta");
+        stagePrincipal.setTitle("Medico/Agenda");
         stagePrincipal.show();
 	}
 	

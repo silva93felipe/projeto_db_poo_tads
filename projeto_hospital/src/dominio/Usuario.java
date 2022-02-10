@@ -30,10 +30,10 @@ public class Usuario extends Pessoa {
 		  
 		  this.dependentes = new ArrayList<>();
 	  }
-		
+		//tabela
 	public Usuario(String cpf, String nome, String dataNasc, String telefone) {
 		  
-		  super(cpf, nome, dataNasc, telefone);
+		  Pessoa2(cpf, nome, dataNasc, telefone);
 		  this.cep = "null";
 		  this.cidade = "null";
 		  //this.dependentes = new ArrayList<>();

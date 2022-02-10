@@ -1,14 +1,8 @@
 package visao;
 //local imports
 import dominio.Consulta;
-import dominio.DependenteUsuario;
-import dominio.Medicamento;
-import dominio.Medico;
 import dominio.Usuario;
 import persistencia.ConsultaDAO;
-import persistencia.DependenteDAO;
-import persistencia.MedicamentoDAO;
-import persistencia.MedicoDAO;
 import persistencia.UsuarioDAO;
 
 //fx imports
@@ -63,6 +57,7 @@ public class Gui955Controller implements Initializable {
 			labelAvClien.setVisible(false);
 			labelAvConsu.setVisible(false);
 			tableConsu.setVisible(false);
+			//TitletPaneCli.setVisible(false);
 	}
 	// Event Listener on Button[#btnCadCli].onAction    
 	@FXML
@@ -101,18 +96,21 @@ public class Gui955Controller implements Initializable {
 	
 	@FXML
 	public void listenerBtnBuscCli (ActionEvent event) {
+		
 		Usuario u = new Usuario();
 		UsuarioDAO uD = new UsuarioDAO();
 	 
 		 u = uD.buscarUsuario(FieldcpfCli2.getText());
 		
 		if(u == null) { 
+			tableCli.setVisible(false);
 			TitletPaneCli1.setText("Usuário não existe!");
 			labelAvClien.setVisible(true);
-			labelAvClien.setText("Error, usuario não encontrado ou...");
+			labelAvClien.setText("Error, usuario não encontrado, ou talvez queira cadastra-lo?");
+			TitletPaneCli.setVisible(true);
 		}
 		else { 
-			tableCli.toBack();
+			//tableCli.setItems(null);
 			ColCpfCli.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 			colNomeCli.setCellValueFactory(new PropertyValueFactory<>("nome"));
 			colDatanascCli.setCellValueFactory(new PropertyValueFactory<>("dataNasc"));
@@ -121,9 +119,8 @@ public class Gui955Controller implements Initializable {
 			usuario.addAll(u);
 			TitletPaneCli1.setText("Usuário encontrado!");
 			FieldcpfCli2.clear();
-		
-		tableCli.setItems(usuario);
-		tableCli.setVisible(true);
+			tableCli.setVisible(true);
+			tableCli.setItems(usuario);
 			
 		}
 	}
@@ -142,15 +139,17 @@ public class Gui955Controller implements Initializable {
 		/*if(cD.existeConsu(FieldIdCosu.getText())) {
 			labelAvConsu.setVisible(true);
 			labelAvConsu.setText("error, já existe consulta nesse ID!");*/
-		FieldIdCosu.clear();
-		FieldCpfMedConsu.clear();
-		FieldCpfCliConsu.clear();
-		FieldataConsu.clear();
-		FieldHoraConsu.clear();
+		
 		
 			cD.cadastrarConsulta(c);
 			labelAvConsu.setVisible(true);
 			labelAvConsu.setText("Cadastro foi um Sucesso!");
+			
+			FieldIdCosu.clear();
+			FieldCpfMedConsu.clear();
+			FieldCpfCliConsu.clear();
+			FieldataConsu.clear();
+			FieldHoraConsu.clear();
 	}
 		
 		
@@ -161,7 +160,7 @@ public class Gui955Controller implements Initializable {
 	public void listenerBtnBuscConsu(ActionEvent event) {
 		tableConsu.setVisible(true);
 		ConsultaDAO cD = new ConsultaDAO();
-		FieldcpfCliConsubus.clear();
+		
 		
 		//if(cD.existeConsu(FieldcpfCliConsubus.getText())) {
 		consu = cD.todasConsultasUsuario(FieldcpfCliConsubus.getText());
@@ -169,12 +168,17 @@ public class Gui955Controller implements Initializable {
 		colCpfMedConsu.setCellValueFactory(new PropertyValueFactory<>("FKmedico"));
 		colDataConsu.setCellValueFactory(new PropertyValueFactory<>("hora"));
 		colhoraConsu.setCellValueFactory(new PropertyValueFactory<>("data"));
-		//TitletPaneConsu.setText("Encontrado!");
-		labelAvConsu.setVisible(true);
-		//labelAvConsu.setText("Consulta encontrada!");
 		
-		FieldcpfCliConsubus.clear();
-		tableConsu.setItems(consu);
+		if(consu.isEmpty()) {
+			TitletPaneConsu.setText("Tente novamente!");
+			labelAvConsu.setVisible(true);
+			labelAvConsu.setText("Nenhuma consulta encontrada!");
+		}else {
+			TitletPaneConsu.setText("Consultas");
+			tableConsu.setItems(consu);
+			labelAvConsu.setText("Consulta(s)encontrada(s)!");
+		}
+			FieldcpfCliConsubus.clear();
 		}
 		/*}else {
 			TitletPaneConsu.setText("Não encontrado!");

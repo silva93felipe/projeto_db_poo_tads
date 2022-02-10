@@ -12,11 +12,11 @@ public class ConsultaDAO {
 	
 	private Conexao consultaConexao;
 	
-	private final String BUSCARCONSULTASMEDICOS = "select * FROM consulta where \"cpfMedico\" = ?";
+	private final String BUSCARCONSULTASMEDICOS = "select * FROM consulta where cpfMedico = ?";
 	
 	//private final String BUSCARPORID = "SELECT idconsulta FROM consulta WHERE idconsulta = ?";
 	
-	private final String BUSCARCONSULTASUSUARIO = "SELECT dataconsulta,horaconsulta,cpfmedico from Consulta where \"cpfusuario\" = ?";
+	private final String BUSCARCONSULTASUSUARIO = "SELECT dataconsulta,horaconsulta,cpfmedico from Consulta where cpfusuario = ?";
 	
 	private final String CADASTRARCONSULTA = "INSERT INTO Consulta ( idconsulta,statusConsulta, cpfMedico, cpfUsuario, dataConsulta, "
 											+ " horaConsulta) VALUES (?,?, ?, ?, ?, ?)";

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane fx:id="Ancora" prefHeight="486.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="visao.Gui955parteIIController">
+   <children>
+      <Pane layoutX="18.0" layoutY="10.0" prefHeight="472.0" prefWidth="520.0">
+         <children>
+            <DialogPane contentText="   Para busca informe o CPF do responsável, ou cadastro." headerText="                         Cadastro/Busca de dependentes" layoutX="45.0" layoutY="14.0" prefHeight="51.0" prefWidth="360.0" />
+            <Label fx:id="LabelAvCdep" layoutX="66.0" layoutY="110.0" text="Cadastro, Informe todos os campos abaixo" />
+            <Line endX="289.0" layoutX="167.0" layoutY="84.0" startX="-100.0" />
+            <Label layoutX="76.0" layoutY="145.0" text="Nome do dependente" />
+            <Label layoutX="76.0" layoutY="179.0" text="CPF do dependente" />
+            <Label layoutX="343.0" layoutY="188.0" text="Sexo" />
+            <Label layoutX="76.0" layoutY="209.0" text="CPF do responsável" />
+            <Label layoutX="343.0" layoutY="145.0" text="Data Nas" />
+            <TextField fx:id="FieldnomeDep" layoutX="215.0" layoutY="141.0" prefHeight="25.0" prefWidth="109.0" />
+            <TextField fx:id="FieldSexoDep" layoutX="385.0" layoutY="184.0" prefHeight="25.0" prefWidth="40.0" />
+            <TextField fx:id="FieldCpfRespn" layoutX="201.0" layoutY="205.0" prefHeight="17.0" prefWidth="96.0" />
+            <TextField fx:id="FieldCpfDep" layoutX="201.0" layoutY="175.0" prefHeight="25.0" prefWidth="96.0" />
+            <TextField fx:id="FieldDataNasc" layoutX="405.0" layoutY="141.0" prefHeight="25.0" prefWidth="84.0" />
+            <Line endX="289.0" layoutX="175.0" layoutY="243.0" startX="-100.0" />
+            <Label layoutX="76.0" layoutY="297.0" text="CPF do responsável" />
+            <Label fx:id="LabelAVbDep" layoutX="68.0" layoutY="265.0" text="Busca de dependentes, informe o CPF do responsável" />
+            <TextField fx:id="FieldCPFrespBuscar" layoutX="193.0" layoutY="293.0" prefHeight="17.0" prefWidth="96.0" />
+            <Button fx:id="btnCadastrarDep" layoutX="341.0" layoutY="106.0" mnemonicParsing="false" onAction="#listenerBtnCadastrarDep" text="Cadastrar" />
+            <Button fx:id="btnBuscarDep" layoutX="334.0" layoutY="293.0" mnemonicParsing="false" onAction="#listenerBtnBuscarDep" text="Buscar" />
+            <TableView fx:id="TabDep" layoutX="66.0" layoutY="324.0" prefHeight="134.0" prefWidth="390.0">
+              <columns>
+                <TableColumn fx:id="ColNomeDep" prefWidth="89.0" text="Nome" />
+                <TableColumn fx:id="ColSexoDep" prefWidth="61.0" text="Sexo" />
+                  <TableColumn fx:id="ColdataNasDep" prefWidth="93.0" text="DataNasc" />
+                  <TableColumn fx:id="ColCPFrespDep" prefWidth="146.0" text="CPF do responsável" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
